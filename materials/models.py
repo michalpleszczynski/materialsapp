@@ -1,3 +1,14 @@
 from django.db import models
 
-# Create your models here.
+from core.models import Category, Subcategory
+
+
+class Material(Category):
+    pass
+
+
+class MaterialSubcategory(Subcategory):
+
+    class Meta:
+        verbose_name = 'Material subcategory'
+        verbose_name_plural = 'Material subcategories'

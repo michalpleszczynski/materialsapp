@@ -1,3 +1,14 @@
 from django.db import models
 
-# Create your models here.
+from core.models import Category, Subcategory
+
+
+class Finish(Category):
+    pass
+
+
+class FinishSubcategory(Subcategory):
+
+    class Meta:
+        verbose_name = 'Finish subcategory'
+        verbose_name_plural = 'Finish subcategories'

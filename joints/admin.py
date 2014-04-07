@@ -1,3 +1,16 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.admin import CategoryAdmin, SubcategoryAdmin
+from .models import Join, JoinSubcategory
+
+
+class JoinAdmin(CategoryAdmin):
+    pass
+
+admin.site.register(Join, JoinAdmin)
+
+
+class JoinSubcategoryAdmin(SubcategoryAdmin):
+    pass
+
+admin.site.register(JoinSubcategory, JoinSubcategoryAdmin)

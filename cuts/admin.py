@@ -1,3 +1,16 @@
 from django.contrib import admin
 
-# Register your models here.
+from core.admin import CategoryAdmin, SubcategoryAdmin
+from .models import Cut, CutSubcategory
+
+
+class CutAdmin(CategoryAdmin):
+    pass
+
+admin.site.register(Cut, CutAdmin)
+
+
+class CutSubcategoryAdmin(SubcategoryAdmin):
+    pass
+
+admin.site.register(CutSubcategory, CutSubcategoryAdmin)

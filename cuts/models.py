@@ -1,3 +1,14 @@
 from django.db import models
 
-# Create your models here.
+from core.models import Category, Subcategory
+
+
+class Cut(Category):
+    pass
+
+
+class CutSubcategory(Subcategory):
+
+    class Meta:
+        verbose_name = 'Cut subcategory'
+        verbose_name_plural = 'Cut subcategories'
