@@ -1,3 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
+from .models import Finish
+
+
+def finish_list(request):
+    finishes = Finish.objects.all()
+    return render(request, 'category/finish_list.html', {'finishes': finishes})

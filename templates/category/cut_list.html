@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section id="list">
+        {% for cut in cuts %}
+        <div>
+            {% if cut.image %}
+                <img src="{% static cut.image.url %}" alt="{{ cut.alt_text }}"/>
+            {% endif %}
+            <div>{{ cut.name }}</div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

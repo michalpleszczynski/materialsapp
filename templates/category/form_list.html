@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section id="list">
+        {% for form in forms %}
+        <div>
+            {% if form.image %}
+                <img src="{% static form.image.url %}" alt="{{ form.alt_text }}"/>
+            {% endif %}
+            <div>{{ form.name }}</div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

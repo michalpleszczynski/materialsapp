@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section id="list">
+        {% for join in joins %}
+        <div>
+            {% if join.image %}
+                <img src="{% static join.image.url %}" alt="{{ join.alt_text }}"/>
+            {% endif %}
+            <div>{{ join.name }}</div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -12,7 +12,7 @@ class Category(models.Model):
         upload_to=lambda instance, filename: '{0}/{1}/{2}'.format(
             ContentType.objects.get_for_model(instance).model, datetime.now().strftime('%Y/%m/%d'), filename))
     alt_text = models.CharField(max_length=50)
-    subcategories = models.ManyToManyField('Subcategory')
+    subcategories = models.ManyToManyField('Subcategory', null=True, blank=True)
 
     def admin_image(self):
         if self.image:
@@ -20,6 +20,9 @@ class Category(models.Model):
         else:
             return ''
     admin_image.allow_tags = True
+
+    def __unicode__(self):
+        return self.name
 
 
 class Subcategory(models.Model):
@@ -38,6 +41,9 @@ class Subcategory(models.Model):
         else:
             return ''
     admin_title_image.allow_tags = True
+
+    def __unicode__(self):
+        return self.name
 
 
 class SubcategoryImage(models.Model):

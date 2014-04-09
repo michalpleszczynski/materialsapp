@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section id="list">
+        {% for material in materials %}
+        <div>
+            {% if material.image %}
+                <img src="{% static material.image.url %}" alt="{{ material.alt_text }}"/>
+            {% endif %}
+            <div>{{ material.name }}</div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

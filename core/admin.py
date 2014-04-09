@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.widgets import FilteredSelectMultiple
 
 from .forms import SubcategoryForm
 from .models import SubcategoryImage
@@ -8,6 +9,14 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name',)
     list_filter = ('name',)
     readonly_fields = ('admin_image', )
+
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        for field in ('subcategories',):
+            if db_field.name == field:
+                field_name = ' '.join(field.split())
+                kwargs['widget'] = FilteredSelectMultiple(field_name, False)
+        return super(CategoryAdmin, self).formfield_for_manytomany(
+            db_field, request, **kwargs)
 
 
 class ImageInline(admin.TabularInline):

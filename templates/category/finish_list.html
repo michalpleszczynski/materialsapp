@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+    <section id="list">
+        {% for finish in finishes %}
+        <div>
+            {% if finish.image %}
+                <img src="{% static finish.image.url %}" alt="{{ finish.alt_text }}"/>
+            {% endif %}
+            <div>{{ finish.name }}</div>
+        </div>
+        {% endfor %}
+    </section>
+{% endblock %}

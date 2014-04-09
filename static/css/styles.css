@@ -1,0 +1,68 @@
+body {
+	background: #FFFFFF;
+	font-family: "trajan pro";
+	font-size: 20px;
+	color: #000000;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+	margin: 20px 20px 20px 20px;
+}
+
+li, #logo, #menu {
+	display: inline-block;
+}
+
+#top_bar, #list {
+    text-align: center;
+}
+
+#list img {
+	width: 300px;
+	height: 250px;
+	margin-top: 75px;
+}
+
+#logo h1 {
+	background: white;
+	font-size: 30px;
+	margin-top: 80px;
+	margin-bottom: 0px;
+}
+
+#logo h3 {
+	color: #600;
+	font-size: 20px;
+	margin-top: 0px;
+	margin-left: 80px;
+}
+
+#allpage {
+	width: 1200px;
+	margin: auto;
+}
+
+#list>div {
+	background: black;
+	color: white;
+	font-size: 15px;
+	width: 300px;
+	height: 400px;
+	display: inline-block;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 50px;
+}
+
+#list>div>div {
+	padding-top: 25px;
+}
+
+footer {
+	text-align: center;
+	font-size: 10px;
+}
