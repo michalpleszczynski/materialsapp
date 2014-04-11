@@ -7,7 +7,7 @@
             {% if material.image %}
                 <img src="{% static material.image.url %}" alt="{{ material.alt_text }}"/>
             {% endif %}
-            <div>{{ material.name }}</div>
+            <p>{{ material.name }}</p>
         </div>
         {% endfor %}
     </section>

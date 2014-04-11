@@ -1,13 +1,7 @@
 from django.contrib import admin
 
-from core.admin import CategoryAdmin, SubcategoryAdmin
-from .models import Form, FormSubcategory
-
-
-class FormAdmin(CategoryAdmin):
-    pass
-
-admin.site.register(Form, FormAdmin)
+from core.admin import SubcategoryAdmin
+from .models import FormSubcategory
 
 
 class FormSubcategoryAdmin(SubcategoryAdmin):

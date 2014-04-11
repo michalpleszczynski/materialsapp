@@ -4,26 +4,13 @@
     {% load staticfiles %}
     <meta charset="utf-8">
     <title>Home page</title>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
 <div id="allpage">
-    <section id="top_bar" class="center_text">
-        <div id="logo">
-            <h1>Materials And Processes</h1>
-            <h3>Ashlee Wlasiuk</h3>
-        </div>
-        <nav id="menu" class="center_text">
-            <ul>
-                <li><a href="{% url 'form_list' %}">Form</a></li>
-                <li><a href="{% url 'cut_list' %}">Cut</a></li>
-                <li><a href="{% url 'join_list' %}">Join</a></li>
-                <li><a href="{% url 'finish_list' %}">Finish</a></li>
-                <li><a href="{% url 'material_list' %}">Materials</a></li>
-            </ul>
-        </nav>
-    </section>
+    {% include 'partials/top.html' %}
 
     {% block content %}
     {% endblock %}

@@ -3,10 +3,6 @@ from django.db import models
 from core.models import Category, Subcategory
 
 
-class Cut(Category):
-    pass
-
-
 class CutSubcategory(Subcategory):
 
     class Meta:

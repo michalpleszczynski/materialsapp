@@ -1,13 +1,7 @@
 from django.contrib import admin
 
-from core.admin import CategoryAdmin, SubcategoryAdmin
-from .models import Cut, CutSubcategory
-
-
-class CutAdmin(CategoryAdmin):
-    pass
-
-admin.site.register(Cut, CutAdmin)
+from core.admin import SubcategoryAdmin
+from .models import CutSubcategory
 
 
 class CutSubcategoryAdmin(SubcategoryAdmin):

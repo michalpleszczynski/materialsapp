@@ -6,7 +6,7 @@ from .models import SubcategoryImage
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'active')
     list_filter = ('name',)
     readonly_fields = ('admin_image', )
 
@@ -26,7 +26,7 @@ class ImageInline(admin.TabularInline):
 
 
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'active')
     list_filter = ('name',)
     fieldsets = (
         (None, {'fields': ('name', 'caption', 'facts', 'video_url')}),

@@ -3,9 +3,28 @@ from datetime import datetime
 from django.templatetags.static import static
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
+from django_extensions.db.models import TimeStampedModel
 
 
-class Category(models.Model):
+class BaseManager(models.Manager):
+    def active(self):
+        return self.get_query_set().filter(active=True)
+
+
+class BaseModel(TimeStampedModel):
+    """
+    Abstract base class with timestamp fields: created, modified (inherited)
+    and active flag
+    """
+    active = models.BooleanField("active", default=True, null=False, blank=False)
+
+    objects = BaseManager()
+
+    class Meta:
+        abstract = True
+
+
+class Category(BaseModel):
     name = models.CharField(max_length=30, null=False, blank=False)
     image = models.ImageField(
         null=False, blank=False,
@@ -25,7 +44,7 @@ class Category(models.Model):
         return self.name
 
 
-class Subcategory(models.Model):
+class Subcategory(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
     title_image = models.ImageField(
         null=False, blank=False,

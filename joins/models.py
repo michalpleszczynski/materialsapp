@@ -3,10 +3,6 @@ from django.db import models
 from core.models import Category, Subcategory
 
 
-class Join(Category):
-    pass
-
-
 class JoinSubcategory(Subcategory):
 
     class Meta:

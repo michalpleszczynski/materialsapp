@@ -1,8 +1,12 @@
 body {
-	background: #FFFFFF;
+	background: #7C7C7C;
 	font-family: "trajan pro";
 	font-size: 20px;
-	color: #000000;
+}
+
+a {
+    text-decoration: none;
+    color: #000000;
 }
 
 ul {
@@ -13,32 +17,44 @@ li {
 	margin: 20px 20px 20px 20px;
 }
 
-li, #logo, #menu {
+li, #title_text, #menu {
 	display: inline-block;
+}
+
+.active {
+    border-bottom: 3px solid;
+    border-bottom-color: #0099FF;
+}
+
+#social_media_bar {
+    background: #2F2F3A;
+    height: 50px;
 }
 
 #top_bar, #list {
     text-align: center;
 }
 
-#list img {
-	width: 300px;
-	height: 250px;
-	margin-top: 75px;
+#title_text {
+    width: 100%;
+    height: 100px;
 }
 
-#logo h1 {
-	background: white;
-	font-size: 30px;
-	margin-top: 80px;
-	margin-bottom: 0px;
+#title_text h1 {
+	font-size: 50px;
 }
 
-#logo h3 {
+#title_text h3 {
 	color: #600;
-	font-size: 20px;
-	margin-top: 0px;
-	margin-left: 80px;
+	font-size: 25px;
+	width: 70%;
+	float: right;
+}
+
+#menu {
+    width: 80%;
+    margin-top: 20px;
+    font-size: 25px;
 }
 
 #allpage {
@@ -46,16 +62,25 @@ li, #logo, #menu {
 	margin: auto;
 }
 
+#list {
+    margin-top: 30px;
+}
+
 #list>div {
-	background: black;
-	color: white;
-	font-size: 15px;
-	width: 300px;
-	height: 400px;
+	width: 250px;
+	height: 375px;
 	display: inline-block;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 50px;
+	margin: 20px;
+}
+
+#list>div>p {
+    color: black;
+	font-size: 15px;
+}
+
+#list img {
+	width: 250px;
+	height: 350px;
 }
 
 #list>div>div {

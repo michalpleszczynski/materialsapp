@@ -1,0 +1,22 @@
+{% url 'form_list' as form_url %}
+{% url 'cut_list' as cut_url %}
+{% url 'join_list' as join_url %}
+{% url 'finish_list' as finish_url %}
+{% url 'material_list' as material_url %}
+
+<div id="social_media_bar"></div>
+<section id="top_bar" class="center_text">
+    <div id="title_text">
+        <h1>Materials And Processes</h1>
+        <h3>Ashlee Wlasiuk</h3>
+    </div>
+    <nav id="menu" class="center_text">
+        <ul>
+            <li><a href="{{ form_url }}" {% if request.path == form_url %} class="active"{% endif %}>Form</a></li>
+            <li><a href="{{ cut_url }}" {% if request.path == cut_url %} class="active"{% endif %}>Cut</a></li>
+            <li><a href="{{ join_url }}" {% if request.path == join_url %} class="active"{% endif %}>Join</a></li>
+            <li><a href="{{ finish_url }}" {% if request.path == finish_url %} class="active"{% endif %}>Finish</a></li>
+            <li><a href="{{ material_url }}" {% if request.path == material_url %} class="active"{% endif %}>Materials</a></li>
+        </ul>
+    </nav>
+</section>

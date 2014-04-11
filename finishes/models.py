@@ -3,10 +3,6 @@ from django.db import models
 from core.models import Category, Subcategory
 
 
-class Finish(Category):
-    pass
-
-
 class FinishSubcategory(Subcategory):
 
     class Meta:

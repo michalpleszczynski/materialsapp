@@ -1,13 +1,7 @@
 from django.contrib import admin
 
-from core.admin import CategoryAdmin, SubcategoryAdmin
-from .models import Finish, FinishSubcategory
-
-
-class FinishAdmin(CategoryAdmin):
-    pass
-
-admin.site.register(Finish, FinishAdmin)
+from core.admin import SubcategoryAdmin
+from .models import FinishSubcategory
 
 
 class FinishSubcategoryAdmin(SubcategoryAdmin):
