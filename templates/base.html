@@ -5,7 +5,10 @@
     <meta charset="utf-8">
     <title>Home page</title>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/stylesheet.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block extrahead %}
+    {% endblock %}
 </head>
 
 <body>
@@ -14,6 +17,8 @@
 
     {% block content %}
     {% endblock %}
+
+    {% include 'partials/bottom.html' %}
 
     <footer class="center_text">
         <p>© Ashlee Wlasiuk 2014<br>

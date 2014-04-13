@@ -1,7 +1,6 @@
 body {
-	background: #7C7C7C;
-	font-family: "trajan pro";
-	font-size: 20px;
+	background: #FFFFFF;
+    font-family: 'caviar_dreamsregular';
 }
 
 a {
@@ -29,6 +28,20 @@ li, #title_text, #menu {
 #social_media_bar {
     background: #2F2F3A;
     height: 50px;
+    overflow: hidden;
+}
+
+#social_media_bar ul {
+    text-align: center;
+    margin-top: 7px;
+}
+
+#social_media_bar li {
+    display: inline;
+}
+
+#bottom_box {
+    height: 400px;
 }
 
 #top_bar, #list {
@@ -38,10 +51,12 @@ li, #title_text, #menu {
 #title_text {
     width: 100%;
     height: 100px;
+    margin-top: 15px;
 }
 
 #title_text h1 {
 	font-size: 50px;
+	font-family: 'pwsimplehandwritingmedium';
 }
 
 #title_text h3 {
@@ -85,6 +100,46 @@ li, #title_text, #menu {
 
 #list>div>div {
 	padding-top: 25px;
+}
+
+#bottom_box {
+    width: 100%;
+    color: #FFFFFF;
+}
+
+#bottom_box section {
+    background: #2F2F3A;
+    height: 450px;
+    position: absolute;
+    padding: 20px 10px 20px 10px;
+}
+
+#bottom_box section article {
+    margin-top: 20px;
+    margin-right: 40px;
+}
+
+#bottom_box section h3 {
+    margin-left: 10px;
+}
+
+#bottom_box p {
+    font-size: 14px;
+}
+
+#bottom_box #blog {
+    left: 0;
+    width: 30%;
+}
+
+#bottom_box #contact{
+    left: 30%;
+    width: 30%;
+}
+
+#bottom_box #gallery{
+    left: 60%;
+    width: 40%;
 }
 
 footer {

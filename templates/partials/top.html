@@ -1,11 +1,21 @@
+{% load staticfiles %}
+
 {% url 'form_list' as form_url %}
 {% url 'cut_list' as cut_url %}
 {% url 'join_list' as join_url %}
 {% url 'finish_list' as finish_url %}
 {% url 'material_list' as material_url %}
 
-<div id="social_media_bar"></div>
-<section id="top_bar" class="center_text">
+<div id="social_media_bar">
+    <ul>
+        <li><img src="{% static 'images/social_media/twitter.png'%}" alt="Twitter"></li>
+        <li><img src="{% static 'images/social_media/facebook.png'%}" alt="Facebook"></li>
+        <li><img src="{% static 'images/social_media/behance.png'%}" alt="Behance"></li>
+        <li><img src="{% static 'images/social_media/google+.png'%}" alt="Google Plus"></li>
+        <li><img src="{% static 'images/social_media/tumblr.png'%}" alt="Tumblr"></li>
+    </ul>
+</div>
+<section id="top_bar">
     <div id="title_text">
         <h1>Materials And Processes</h1>
         <h3>Ashlee Wlasiuk</h3>
