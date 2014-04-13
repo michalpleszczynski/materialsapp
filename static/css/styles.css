@@ -104,6 +104,8 @@ li, #title_text, #menu {
 
 #bottom_box {
     width: 100%;
+    height: 470px;
+    background: #2F2F3A;
     color: #FFFFFF;
 }
 
@@ -111,7 +113,8 @@ li, #title_text, #menu {
     background: #2F2F3A;
     height: 450px;
     position: absolute;
-    padding: 20px 10px 20px 10px;
+    overflow: auto;
+    margin: 10px;
 }
 
 #bottom_box section article {
@@ -129,17 +132,22 @@ li, #title_text, #menu {
 
 #bottom_box #blog {
     left: 0;
-    width: 30%;
-}
-
-#bottom_box #contact{
-    left: 30%;
-    width: 30%;
-}
-
-#bottom_box #gallery{
-    left: 60%;
     width: 40%;
+}
+
+#bottom_box #contact {
+    left: 40%;
+    width: 30%;
+}
+
+#bottom_box #gallery {
+    left: 70%;
+    width: 30%;
+    margin-left: 0px;
+}
+
+#bottom_box #gallery img {
+    margin: 2px;
 }
 
 footer {

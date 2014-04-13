@@ -20,5 +20,8 @@
     </section>
     <section id="gallery">
         <h4>My Gallery</h4>
+        {% for image in gallery %}
+            <img src="{% static image %}" alt="Gallery image">
+        {% endfor %}
     </section>
 </section>

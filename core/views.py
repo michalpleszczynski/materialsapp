@@ -39,6 +39,7 @@ def home(request):
             },
         ],
     }
+    images = ['images/no_image.png'] * 9
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -46,4 +47,4 @@ def home(request):
             return HttpResponseRedirect(reverse('home'))
     else:
         form = ContactForm()
-    return render(request, 'index.html', {'posts':blog_posts['posts'], 'form': form})
+    return render(request, 'index.html', {'posts':blog_posts['posts'], 'form': form, 'gallery': images})

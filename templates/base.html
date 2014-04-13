@@ -12,18 +12,16 @@
 </head>
 
 <body>
-<div id="allpage">
     {% include 'partials/top.html' %}
 
     {% block content %}
     {% endblock %}
-
-    {% include 'partials/bottom.html' %}
 
     <footer class="center_text">
         <p>© Ashlee Wlasiuk 2014<br>
             All rights reserved
         </p>
     </footer>
-</div>
+
+    {% include 'partials/bottom.html' %}
 </body>
