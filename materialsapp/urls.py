@@ -1,8 +1,12 @@
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
+
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 
 from django.contrib import admin
+
 admin.autodiscover()
+dajaxice_autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'core.views.home', name='home'),
@@ -16,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^cut_list/$', 'cuts.views.cut_list', name='cut_list'),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 )
 
 if settings.DEBUG:

@@ -4,7 +4,6 @@
 {% url 'cut_list' as cut_url %}
 {% url 'join_list' as join_url %}
 {% url 'finish_list' as finish_url %}
-{% url 'material_list' as material_url %}
 
 <div id="social_media_bar">
     <ul>
@@ -22,11 +21,11 @@
     </div>
     <nav id="menu" class="center_text">
         <ul>
-            <li><a href="{{ form_url }}" {% if request.path == form_url %} class="active"{% endif %}>Form</a></li>
-            <li><a href="{{ cut_url }}" {% if request.path == cut_url %} class="active"{% endif %}>Cut</a></li>
-            <li><a href="{{ join_url }}" {% if request.path == join_url %} class="active"{% endif %}>Join</a></li>
-            <li><a href="{{ finish_url }}" {% if request.path == finish_url %} class="active"{% endif %}>Finish</a></li>
-            <li><a href="{{ material_url }}" {% if request.path == material_url %} class="active"{% endif %}>Materials</a></li>
+            <li><a id="forms_link" href="#" onclick="Dajaxice.forms.get_forms(Dajax.process);">Form</a></li>
+            <li><a id="cuts_link" href="#" onclick="Dajaxice.cuts.get_cuts(Dajax.process);">Cut</a></li>
+            <li><a id="joins_link" href="#" onclick="Dajaxice.joins.get_joins(Dajax.process);">Join</a></li>
+            <li><a id="finishes_link" href="#" onclick="Dajaxice.finishes.get_finishes(Dajax.process);">Finish</a></li>
+            <li><a id="materials_link" href="#" onclick="Dajaxice.materials.get_materials(Dajax.process);">Materials</a></li>
         </ul>
     </nav>
 </section>

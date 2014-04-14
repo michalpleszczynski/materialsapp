@@ -2,11 +2,15 @@
 <html lang="en">
 <head>
     {% load staticfiles %}
+    {% load dajaxice_templatetags %}
     <meta charset="utf-8">
     <title>Home page</title>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/stylesheet.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static '/static/dajax/jquery.dajax.core.js' %}"></script>
+    <script src="{% static 'js/main_page.js' %}"></script>
+    {% dajaxice_js_import %}
     {% block extrahead %}
     {% endblock %}
 </head>
@@ -14,8 +18,10 @@
 <body>
     {% include 'partials/top.html' %}
 
-    {% block content %}
-    {% endblock %}
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 
     <footer class="center_text">
         <p>© Ashlee Wlasiuk 2014<br>

@@ -25,6 +25,10 @@ li, #title_text, #menu {
     border-bottom-color: #0099FF;
 }
 
+#menu a:focus {
+    outline: none;
+}
+
 #social_media_bar {
     background: #2F2F3A;
     height: 50px;
@@ -95,7 +99,7 @@ li, #title_text, #menu {
 
 #list img {
 	width: 250px;
-	height: 350px;
+	height: 250px;
 }
 
 #list>div>div {

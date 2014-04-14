@@ -76,3 +76,7 @@ table {
 textarea, input{
     font-size: 15px;
 }
+
+a:active {
+    outline: none;
+}
