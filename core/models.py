@@ -26,19 +26,15 @@ class BaseModel(TimeStampedModel):
 
 class Category(BaseModel):
     name = models.CharField(max_length=30, null=False, blank=False)
-    image = models.ImageField(
-        null=False, blank=False,
-        upload_to=lambda instance, filename: '{0}/{1}/{2}'.format(
-            ContentType.objects.get_for_model(instance).model, datetime.now().strftime('%Y/%m/%d'), filename))
-    alt_text = models.CharField(max_length=50)
+    image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
     subcategories = models.ManyToManyField('Subcategory', null=True, blank=True)
 
-    def admin_image(self):
+    def image_preview(self):
         if self.image:
-            return '<img src="%s" />' % static(str(self.image))
+            return self.image.admin_image()
         else:
             return ''
-    admin_image.allow_tags = True
+    image_preview.allow_tags = True
 
     def __unicode__(self):
         return self.name
@@ -46,32 +42,46 @@ class Category(BaseModel):
 
 class Subcategory(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
-    title_image = models.ImageField(
-        null=False, blank=False,
-        upload_to=lambda instance, filename: '{0}/{1}/{2}'.format(
-            ContentType.objects.get_for_model(instance).model, datetime.now().strftime('%Y/%m/%d'), filename))
-    caption = models.CharField(max_length=2000)
-    facts = models.CharField(max_length=1000)
-    video_url = models.URLField(max_length=255)
-
-    def admin_title_image(self):
-        if self.title_image:
-            return '<img src="%s" />' % static(str(self.title_image))
-        else:
-            return ''
-    admin_title_image.allow_tags = True
+    caption = models.CharField(max_length=500, null=True, blank=True)
+    details = models.ManyToManyField('Detail', null=True, blank=True)
 
     def __unicode__(self):
         return self.name
 
 
-class SubcategoryImage(models.Model):
-    subcategory = models.ForeignKey(Subcategory, related_name='images')
+class Detail(BaseModel):
+    name = models.CharField(max_length=60, null=False, blank=False)
+    title_image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
+    caption = models.CharField(max_length=2000)
+    facts = models.CharField(max_length=1000)
+    video_url = models.URLField(max_length=255)
+
+    def title_image_preview(self):
+        if self.title_image:
+            return self.title_image.admin_image()
+        else:
+            return ''
+    title_image_preview.allow_tags = True
+
+    def __unicode__(self):
+        return self.name
+
+
+class DetailSection(BaseModel):
+    label = models.CharField(max_length=30, null=True, blank=True)
+    detail = models.ForeignKey(Detail, null=False, blank=False, related_name='sections')
+
+    def __unicode__(self):
+        return self.label
+
+
+class Image(models.Model):
     image = models.ImageField(
         null=False, blank=False,
-        upload_to=lambda instance, filename: '{0}/{1}/{2}'.format(
-            ContentType.objects.get_for_model(instance.subcategory).model, datetime.now().strftime('%Y/%m/%d'), filename))
-    alt_text = models.CharField(max_length=50)
+        upload_to=lambda instance, filename: '{0}/{1}'.format(datetime.now().strftime('%Y/%m/%d'), filename))
+    alt_text = models.CharField(max_length=50, null=True, blank=True)
+    figcaption = models.CharField('Figure caption', max_length=150, null=True, blank=True)
+    url = models.URLField(max_length=255, null=True, blank=True)
 
     def admin_image(self):
         if self.image:
@@ -79,3 +89,13 @@ class SubcategoryImage(models.Model):
         else:
             return ''
     admin_image.allow_tags = True
+
+    def image_name(self):
+        return self.image.name
+
+    def __unicode__(self):
+        return self.image.name
+
+
+class DetailSectionImage(Image):
+    subcategory = models.ForeignKey(DetailSection, related_name='images')

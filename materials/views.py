@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import Material, MaterialSubcategory
+from .models import Material, MaterialDetail
 
 
 def material_list(request):
@@ -9,5 +9,5 @@ def material_list(request):
 
 
 def material_detail(request, id):
-    material = MaterialSubcategory.objects.active().get(pk=id)
+    material = MaterialDetail.objects.active().get(pk=id)
     return render(request, 'subcategory/materials/material_detail.html', {'material': material})

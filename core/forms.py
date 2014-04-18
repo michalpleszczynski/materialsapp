@@ -10,6 +10,15 @@ class SubcategoryForm(forms.ModelForm):
         model = Subcategory
         widgets = {
             'caption': forms.Textarea(),
+        }
+
+
+class DetailForm(forms.ModelForm):
+
+    class Meta:
+        model = Subcategory
+        widgets = {
+            'caption': forms.Textarea(),
             'facts': forms.Textarea(),
         }
 

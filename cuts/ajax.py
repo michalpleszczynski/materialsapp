@@ -4,12 +4,12 @@ from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
-from .models import CutSubcategory
+from .models import CutDetail
 
 
 @dajaxice_register
 def get_cuts(request):
-    cuts = CutSubcategory.objects.active()
+    cuts = CutDetail.objects.active()
     render = render_to_string('partials/cut_list.html', {'cuts': cuts})
 
     dajax = Dajax()

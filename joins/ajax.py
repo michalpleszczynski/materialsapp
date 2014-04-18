@@ -4,12 +4,12 @@ from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
-from .models import JoinSubcategory
+from .models import JoinDetail
 
 
 @dajaxice_register
 def get_joins(request):
-    joins = JoinSubcategory.objects.active()
+    joins = JoinDetail.objects.active()
     render = render_to_string('partials/join_list.html', {'joins': joins})
 
     dajax = Dajax()

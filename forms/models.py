@@ -1,6 +1,4 @@
-from django.db import models
-
-from core.models import Category, Subcategory
+from core.models import Subcategory, Detail
 
 
 class FormSubcategory(Subcategory):
@@ -8,3 +6,10 @@ class FormSubcategory(Subcategory):
     class Meta:
         verbose_name = 'Form subcategory'
         verbose_name_plural = 'Form subcategories'
+
+
+class FormDetail(Detail):
+
+    class Meta:
+        verbose_name = 'Form detail'
+        verbose_name_plural = 'Form details'

@@ -4,12 +4,12 @@ from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
-from .models import FinishSubcategory
+from .models import FinishDetail
 
 
 @dajaxice_register
 def get_finishes(request):
-    finishes = FinishSubcategory.objects.active()
+    finishes = FinishDetail.objects.active()
     render = render_to_string('partials/finish_list.html', {'finishes': finishes})
 
     dajax = Dajax()

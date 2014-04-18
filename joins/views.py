@@ -1,8 +1,8 @@
 from django.shortcuts import render
 
-from .models import JoinSubcategory
+from .models import JoinDetail
 
 
 def join_list(request):
-    joins = JoinSubcategory.objects.active()
+    joins = JoinDetail.objects.active()
     return render(request, 'category/join_list.html', {'joins': joins})
