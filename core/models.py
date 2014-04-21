@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from django.templatetags.static import static
 from django.db import models
-from django.contrib.contenttypes.models import ContentType
+
 from django_extensions.db.models import TimeStampedModel
+from sorl.thumbnail import ImageField
 
 
 class BaseManager(models.Manager):
@@ -27,7 +27,7 @@ class BaseModel(TimeStampedModel):
 class Category(BaseModel):
     name = models.CharField(max_length=30, null=False, blank=False)
     image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
-    subcategories = models.ManyToManyField('Subcategory', null=True, blank=True)
+    subcategories = models.ManyToManyField('Subcategory', null=True, blank=True, related_name='categories')
 
     def image_preview(self):
         if self.image:
@@ -39,6 +39,9 @@ class Category(BaseModel):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class Subcategory(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
@@ -46,6 +49,9 @@ class Subcategory(BaseModel):
     details = models.ManyToManyField('Detail', null=True, blank=True)
 
     def __unicode__(self):
+        return self.name
+
+    def __str__(self):
         return self.name
 
 
@@ -66,6 +72,9 @@ class Detail(BaseModel):
     def __unicode__(self):
         return self.name
 
+    def __str__(self):
+        return self.name
+
 
 class DetailSection(BaseModel):
     label = models.CharField(max_length=30, null=True, blank=True)
@@ -74,26 +83,25 @@ class DetailSection(BaseModel):
     def __unicode__(self):
         return self.label
 
+    def __str__(self):
+        return self.name
+
 
 class Image(models.Model):
-    image = models.ImageField(
+    image = ImageField(
         null=False, blank=False,
         upload_to=lambda instance, filename: '{0}/{1}'.format(datetime.now().strftime('%Y/%m/%d'), filename))
     alt_text = models.CharField(max_length=50, null=True, blank=True)
     figcaption = models.CharField('Figure caption', max_length=150, null=True, blank=True)
     url = models.URLField(max_length=255, null=True, blank=True)
 
-    def admin_image(self):
-        if self.image:
-            return '<img src="%s" />' % static(str(self.image))
-        else:
-            return ''
-    admin_image.allow_tags = True
-
     def image_name(self):
         return self.image.name
 
     def __unicode__(self):
+        return self.image.name
+
+    def __str__(self):
         return self.image.name
 
 

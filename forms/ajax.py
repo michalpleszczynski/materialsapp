@@ -10,7 +10,7 @@ from .models import FormDetail
 @dajaxice_register
 def get_forms(request):
     forms = FormDetail.objects.active()
-    render = render_to_string('partials/form_list.html', {'forms': forms})
+    render = render_to_string('partials/subcategory/form_list.html', {'forms': forms})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)

@@ -1,0 +1,10 @@
+.material_image {
+	width: 250px;
+	height: 285px;
+	display: inline-block;
+	margin: 20px;
+}
+
+#list {
+    text-align: center;
+}

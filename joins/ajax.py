@@ -10,7 +10,7 @@ from .models import JoinDetail
 @dajaxice_register
 def get_joins(request):
     joins = JoinDetail.objects.active()
-    render = render_to_string('partials/join_list.html', {'joins': joins})
+    render = render_to_string('partials/subcategory/join_list.html', {'joins': joins})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)

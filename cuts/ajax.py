@@ -10,7 +10,7 @@ from .models import CutDetail
 @dajaxice_register
 def get_cuts(request):
     cuts = CutDetail.objects.active()
-    render = render_to_string('partials/cut_list.html', {'cuts': cuts})
+    render = render_to_string('partials/subcategory/cut_list.html', {'cuts': cuts})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)

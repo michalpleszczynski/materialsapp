@@ -25,6 +25,10 @@ li, #title_text, #menu {
     border-bottom-color: #0099FF;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 #menu a:focus {
     outline: none;
 }
@@ -48,7 +52,7 @@ li, #title_text, #menu {
     height: 400px;
 }
 
-#top_bar, #list {
+#top_bar {
     text-align: center;
 }
 
@@ -73,7 +77,7 @@ li, #title_text, #menu {
 #menu {
     width: 80%;
     margin-top: 20px;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 #allpage {
@@ -81,29 +85,8 @@ li, #title_text, #menu {
 	margin: auto;
 }
 
-#list {
-    margin-top: 30px;
-}
-
-#list>div {
-	width: 250px;
-	height: 375px;
-	display: inline-block;
-	margin: 20px;
-}
-
-#list>div>p {
-    color: black;
-	font-size: 15px;
-}
-
-#list img {
-	width: 250px;
-	height: 250px;
-}
-
-#list>div>div {
-	padding-top: 25px;
+#content {
+    padding: 50px 150px 50px 150px;
 }
 
 #bottom_box {

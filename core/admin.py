@@ -1,15 +1,17 @@
 from django.contrib import admin
-from django.contrib.admin.widgets import FilteredSelectMultiple
+from django.contrib.admin.widgets import FilteredSelectMultiple, RelatedFieldWidgetWrapper
 from django.core import urlresolvers
 
+from sorl.thumbnail.admin import AdminImageMixin
+
 from .forms import SubcategoryForm, DetailForm
-from .models import DetailSection, Image, DetailSectionImage
+from .models import DetailSection, Image, DetailSectionImage, Detail, Category
+from .widgets import AdminRelatedImageWidget
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'active')
     list_filter = ('name',)
-    readonly_fields = ('image_preview', )
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         for field in ('subcategories',):
@@ -18,6 +20,17 @@ class CategoryAdmin(admin.ModelAdmin):
                 kwargs['widget'] = FilteredSelectMultiple(field_name, False)
         return super(CategoryAdmin, self).formfield_for_manytomany(
             db_field, request, **kwargs)
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'image':
+            return db_field.formfield(widget=
+                                      RelatedFieldWidgetWrapper(
+                                          AdminRelatedImageWidget(),
+                                          Category._meta.get_field('image').rel,
+                                          self.admin_site
+                                      ))
+        sup = super(CategoryAdmin, self)
+        return sup.formfield_for_dbfield(db_field, **kwargs)
 
 
 class SubcategoryAdmin(admin.ModelAdmin):
@@ -51,7 +64,7 @@ class DetailSectionInline(admin.TabularInline):
     changeform_link.short_description = ''   # omit column header
 
 
-class DetailSectionImageInline(admin.StackedInline):
+class DetailSectionImageInline(AdminImageMixin, admin.StackedInline):
     model = DetailSectionImage
     extra = 0
 
@@ -67,14 +80,24 @@ class DetailAdmin(admin.ModelAdmin):
     list_filter = ('name',)
     fieldsets = (
         (None, {'fields': ('name', 'caption', 'facts', 'video_url')}),
-        ('Title Image', {'fields': ('title_image', 'title_image_preview')}),
+        ('Title Image', {'fields': ('title_image',)}),
     )
-    readonly_fields = ('title_image_preview', )
     form = DetailForm
     inlines = (DetailSectionInline,)
 
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        if db_field.name == 'title_image':
+            return db_field.formfield(widget=
+                                      RelatedFieldWidgetWrapper(
+                                          AdminRelatedImageWidget(),
+                                          Detail._meta.get_field('title_image').rel,
+                                          self.admin_site
+                                      ))
+        sup = super(DetailAdmin, self)
+        return sup.formfield_for_dbfield(db_field, **kwargs)
 
-class ImageAdmin(admin.ModelAdmin):
+
+class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ('image_name',)
 
 admin.site.register(Image, ImageAdmin)

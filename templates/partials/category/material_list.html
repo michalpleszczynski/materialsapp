@@ -1,0 +1,19 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/category/styles.css' %}">
+{% endblock %}
+
+<section id="list">
+    {% for material in materials %}
+        <div class="clickable material_image" onclick="Dajaxice.materials.get_subcategories(Dajax.process, {'material_id': {{ material.id }} });">
+            {% if material.image %}
+                {% thumbnail material.image.image "250x250" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ material.image.alt_text }}">
+                {% endthumbnail %}
+            {% endif %}
+            <h5>{{ material.name }}</h5>
+        </div>
+    {% endfor %}
+</section>

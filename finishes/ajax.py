@@ -10,7 +10,7 @@ from .models import FinishDetail
 @dajaxice_register
 def get_finishes(request):
     finishes = FinishDetail.objects.active()
-    render = render_to_string('partials/finish_list.html', {'finishes': finishes})
+    render = render_to_string('partials/subcategory/finish_list.html', {'finishes': finishes})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)
