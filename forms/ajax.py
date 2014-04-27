@@ -4,13 +4,13 @@ from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
-from .models import FormDetail
+from .models import FormSubcategory
 
 
 @dajaxice_register
-def get_forms(request):
-    forms = FormDetail.objects.active()
-    render = render_to_string('partials/subcategory/form_list.html', {'forms': forms})
+def get_subcategories(request):
+    subcategories = FormSubcategory.objects.active()
+    render = render_to_string('partials/subcategory/form_subcategory_list.html', {'subcategories': subcategories})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)

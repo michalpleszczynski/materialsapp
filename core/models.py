@@ -60,7 +60,7 @@ class Detail(BaseModel):
     title_image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
     caption = models.CharField(max_length=2000)
     facts = models.CharField(max_length=1000)
-    video_url = models.URLField(max_length=255)
+    video_url = models.URLField(max_length=255, null=True, blank=True)
 
     def title_image_preview(self):
         if self.title_image:
@@ -84,7 +84,7 @@ class DetailSection(BaseModel):
         return self.label
 
     def __str__(self):
-        return self.name
+        return self.label
 
 
 class Image(models.Model):

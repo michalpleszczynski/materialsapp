@@ -1,0 +1,11 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load dajaxice_templatetags %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script src="{% static '/static/dajax/jquery.dajax.core.js' %}"></script>
+    {% dajaxice_js_import %}
+    <script src="{% static '/static/js/admin/image_ajax_widget.js' %}"></script>
+{% endblock %}

@@ -16,16 +16,17 @@
 </div>
 <section id="top_bar">
     <div id="title_text">
+        <a href="{% url 'home' %}"><span class="link_span"></span></a>
         <h1>Materials And Processes</h1>
         <h3>Ashlee Wlasiuk</h3>
     </div>
     <nav id="menu" class="center_text">
         <ul>
-            <li><a id="forms_link" href="#" onclick="Dajaxice.forms.get_forms(Dajax.process);">Form</a></li>
-            <li><a id="cuts_link" href="#" onclick="Dajaxice.cuts.get_cuts(Dajax.process);">Cut</a></li>
-            <li><a id="joins_link" href="#" onclick="Dajaxice.joins.get_joins(Dajax.process);">Join</a></li>
-            <li><a id="finishes_link" href="#" onclick="Dajaxice.finishes.get_finishes(Dajax.process);">Finish</a></li>
-            <li><a id="materials_link" href="#" onclick="Dajaxice.materials.get_materials(Dajax.process);">Materials</a></li>
+            <li><a id="forms_link" class="clickable" onclick="Dajaxice.forms.get_subcategories(Dajax.process);">Form</a></li>
+            <li><a id="cuts_link" class="clickable" onclick="Dajaxice.cuts.get_subcategories(Dajax.process);">Cut</a></li>
+            <li><a id="joins_link" class="clickable" onclick="Dajaxice.joins.get_subcategories(Dajax.process);">Join</a></li>
+            <li><a id="finishes_link" class="clickable" onclick="Dajaxice.finishes.get_subcategories(Dajax.process);">Finish</a></li>
+            <li><a id="materials_link" class="clickable" onclick="Dajaxice.materials.get_materials(Dajax.process);">Materials</a></li>
         </ul>
     </nav>
 </section>

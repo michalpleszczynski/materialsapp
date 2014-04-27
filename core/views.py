@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 from .forms import ContactForm
+from .models import Detail
 
 
 logger = logging.getLogger(__name__)
@@ -48,3 +49,12 @@ def home(request):
     else:
         form = ContactForm()
     return render(request, 'index.html', {'posts':blog_posts['posts'], 'form': form, 'gallery': images})
+
+
+def subcategory(request, ajax_function):
+    return render(request, 'index.html', {'ajax_function': ajax_function})
+
+
+def detail(request, id):
+    detail_obj = Detail.objects.get(pk=id)
+    return render(request, 'detail/detail.html', {'detail': detail_obj})

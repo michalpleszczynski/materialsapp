@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/stylesheet.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static '/static/js/jquery-1.11.0.js' %}"></script>
     <script src="{% static '/static/dajax/jquery.dajax.core.js' %}"></script>
     <script src="{% static 'js/main_page.js' %}"></script>
     {% dajaxice_js_import %}
@@ -15,7 +16,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body {% if ajax_function %}onload="{{ ajax_function }}"{% endif %}>
     {% include 'partials/top.html' %}
 
     <div id="content">
@@ -30,4 +31,18 @@
     </footer>
 
     {% include 'partials/bottom.html' %}
+    {% block extrascript %}
+    <script>
+        var state = {html: document.getElementById("content").innerHTML};
+        history.pushState(state, '', '');
+    </script>
+    {% endblock %}
+    <script>
+        window.onpopstate = function(e){
+            if(e.state){
+                document.getElementById("content").innerHTML = e.state.html;
+            }
+            set_active_link('');
+        };
+    </script>
 </body>

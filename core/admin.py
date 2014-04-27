@@ -12,6 +12,7 @@ from .widgets import AdminRelatedImageWidget
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'active')
     list_filter = ('name',)
+    change_form_template = 'admin/change_form_with_image.html'
 
     def formfield_for_manytomany(self, db_field, request=None, **kwargs):
         for field in ('subcategories',):
@@ -84,6 +85,7 @@ class DetailAdmin(admin.ModelAdmin):
     )
     form = DetailForm
     inlines = (DetailSectionInline,)
+    change_form_template = 'admin/change_form_with_image.html'
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'title_image':

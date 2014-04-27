@@ -10,19 +10,21 @@ admin.autodiscover()
 dajaxice_autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'core.views.home', name='home'),
-
-    url(r'^material_list/$', 'materials.views.material_list', name='material_list'),
-    url(r'^view_material/(?P<id>\w+)$', 'materials.views.material_detail', name='material_detail'),
-
-    url(r'^join_list/$', 'joins.views.join_list', name='join_list'),
-    url(r'^form_list/$', 'forms.views.form_list', name='form_list'),
-    url(r'^finish_list/$', 'finishes.views.finish_list', name='finish_list'),
-    url(r'^cut_list/$', 'cuts.views.cut_list', name='cut_list'),
-
     url(r'^admin/', include(admin.site.urls)),
-
     url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
+
+    url(r'^$', 'core.views.home', name='home'),
+    url(r'^view_detail/(?P<id>\w+)$', 'core.views.detail', name='detail'),
+    url(r'^materials/', include('materials.urls')),
+    url(r'^cut/$', 'core.views.subcategory',
+        {'ajax_function': 'Dajaxice.cuts.get_subcategories(Dajax.process)'}, name='cut_list'),
+    url(r'^finish/$', 'core.views.subcategory',
+        {'ajax_function': 'Dajaxice.finishes.get_subcategories(Dajax.process)'}, name='finish_list'),
+    url(r'^form/$', 'core.views.subcategory',
+        {'ajax_function': 'Dajaxice.forms.get_subcategories(Dajax.process)'}, name='form_list'),
+    url(r'^join/$', 'core.views.subcategory',
+        {'ajax_function': 'Dajaxice.joins.get_subcategories(Dajax.process)'}, name='join_list'),
+
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

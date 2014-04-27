@@ -5,4 +5,4 @@ from .models import FinishDetail
 
 def finish_list(request):
     finishes = FinishDetail.objects.active()
-    return render(request, 'category/finish_list.html', {'finishes': finishes})
+    return render(request, 'category/finish_subcategory_list.html', {'finishes': finishes})

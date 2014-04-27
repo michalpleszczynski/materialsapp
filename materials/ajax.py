@@ -24,19 +24,20 @@ def get_materials(request):
 def get_subcategories(request):
     material_id = json.loads(request.POST.get('argv'))['material_id']
     subcategories = MaterialSubcategory.objects.filter(categories=material_id)
-    render = render_to_string('partials/subcategory/material_subcategory_list.html', {'subcategories': subcategories})
+    render = render_to_string('partials/subcategory/material_subcategory_list.html',
+                              {'subcategories': subcategories, 'material_id': material_id})
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)
     return dajax.json()
 
 
-@dajaxice_register
-def get_detail(request):
-    detail_id = json.loads(request.POST.get('argv'))['detail_id']
-    detail = MaterialDetail.objects.get(pk=detail_id)
-    render = render_to_string('partials/detail/material.html', {'detail': detail})
-
-    dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    return dajax.json()
+# @dajaxice_register
+# def get_detail(request):
+#     detail_id = json.loads(request.POST.get('argv'))['detail_id']
+#     detail = MaterialDetail.objects.get(pk=detail_id)
+#     render = render_to_string('partials/detail/material.html', {'detail': detail})
+#
+#     dajax = Dajax()
+#     dajax.assign('#content', 'innerHTML', render)
+#     return dajax.json()
