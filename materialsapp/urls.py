@@ -16,14 +16,10 @@ urlpatterns = patterns('',
     url(r'^$', 'core.views.home', name='home'),
     url(r'^view_detail/(?P<id>\w+)$', 'core.views.detail', name='detail'),
     url(r'^materials/', include('materials.urls')),
-    url(r'^cut/$', 'core.views.subcategory',
-        {'ajax_function': 'Dajaxice.cuts.get_subcategories(Dajax.process)'}, name='cut_list'),
-    url(r'^finish/$', 'core.views.subcategory',
-        {'ajax_function': 'Dajaxice.finishes.get_subcategories(Dajax.process)'}, name='finish_list'),
-    url(r'^form/$', 'core.views.subcategory',
-        {'ajax_function': 'Dajaxice.forms.get_subcategories(Dajax.process)'}, name='form_list'),
-    url(r'^join/$', 'core.views.subcategory',
-        {'ajax_function': 'Dajaxice.joins.get_subcategories(Dajax.process)'}, name='join_list'),
+    url(r'^join/', include('joins.urls')),
+    url(r'^cut/', include('cuts.urls')),
+    url(r'^finish/', include('finishes.urls')),
+    url(r'^form/$', include('forms.urls')),
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -29,15 +29,17 @@ def get_subcategories(request):
 
     dajax = Dajax()
     dajax.assign('#content', 'innerHTML', render)
+    dajax.script('set_active_link("#materials_link");')
     return dajax.json()
 
 
-# @dajaxice_register
-# def get_detail(request):
-#     detail_id = json.loads(request.POST.get('argv'))['detail_id']
-#     detail = MaterialDetail.objects.get(pk=detail_id)
-#     render = render_to_string('partials/detail/material.html', {'detail': detail})
-#
-#     dajax = Dajax()
-#     dajax.assign('#content', 'innerHTML', render)
-#     return dajax.json()
+@dajaxice_register
+def get_detail(request):
+    detail_id = int(json.loads(request.POST.get('argv'))['detail_id'])
+    detail = MaterialDetail.objects.get(pk=detail_id)
+    render = render_to_string('partials/detail/material_detail.html', {'detail': detail})
+
+    dajax = Dajax()
+    dajax.assign('#content', 'innerHTML', render)
+    dajax.script('set_active_link("#materials_link");')
+    return dajax.json()

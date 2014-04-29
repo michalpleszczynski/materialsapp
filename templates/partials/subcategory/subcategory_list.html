@@ -8,11 +8,11 @@
 <section id="subcategory_list">
     {% for subcategory in subcategories %}
         <h3 class="subcategory_name">{{ subcategory.name }}</h3>
-        <p class="subcategory_caption">{{ subcategory.caption }}</p>
+        <p class="subcategory_caption">{{ subcategory.caption|linebreaks }}</p>
         <div id="images">
             {% for detail in subcategory.details.active %}
                 <div class="detail_image">
-                    <a href="{% url 'detail' detail.id %}"><span class="link_span"></span></a>
+                    <a class="detail_link" id="{{ detail.id }}"><span class="link_span"></span></a>
                     {% if detail.title_image %}
                         {% thumbnail detail.title_image.image "130x130" crop="center" as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">

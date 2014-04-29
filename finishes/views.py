@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
-from .models import FinishDetail
 
-
-def finish_list(request):
-    finishes = FinishDetail.objects.active()
-    return render(request, 'category/finish_subcategory_list.html', {'finishes': finishes})
+def finish_detail(request, finish_id, ajax_function):
+    ajax_function = ajax_function.replace('{0}', finish_id)
+    return render(request, 'index.html', {'ajax_function': ajax_function})

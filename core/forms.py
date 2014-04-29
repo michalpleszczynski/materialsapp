@@ -18,8 +18,8 @@ class DetailForm(forms.ModelForm):
     class Meta:
         model = Subcategory
         widgets = {
-            'caption': forms.Textarea(),
-            'facts': forms.Textarea(),
+            'caption': forms.Textarea(attrs={'rows': 10, 'cols': 150}),
+            'facts': forms.Textarea(attrs={'rows': 10, 'cols': 150}),
         }
 
 

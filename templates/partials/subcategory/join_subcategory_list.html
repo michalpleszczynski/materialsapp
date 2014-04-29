@@ -2,6 +2,11 @@
 
 {% block extrascript %}
 <script>
+    document.title = 'Materials and Processes - Join';
+    $('.detail_link').click(function () {
+        var clicked = $(this);
+        Dajaxice.joins.get_detail(Dajax.process, {'detail_id': this.id });
+    });
     var state = {html: document.getElementById("content").innerHTML};
     history.pushState(state, '', '/join/');
 </script>

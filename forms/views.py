@@ -1,8 +1,6 @@
 from django.shortcuts import render
 
-from .models import FormDetail
 
-
-def form_list(request):
-    forms = FormDetail.objects.active()
-    return render(request, 'category/form_subcategory_list.html', {'forms': forms})
+def form_detail(request, form_id, ajax_function):
+    ajax_function = ajax_function.replace('{0}', form_id)
+    return render(request, 'index.html', {'ajax_function': ajax_function})

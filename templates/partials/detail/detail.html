@@ -1,0 +1,39 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+{% block extrahead %}
+    <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+    <section id="detail">
+        <h3>{{ detail.name }}</h3>
+        <p id="caption">{{ detail.caption|linebreaks }}</p>
+        <ul id="facts">{{ detail.facts|safe }}</ul>
+        {% if detail.title_image %}
+            {% thumbnail detail.title_image.image "600x480" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
+            {% endthumbnail %}
+        {% endif %}
+        {% for section in detail.sections.active %}
+            <div class="detail_image_section">
+                <h5>{{ section.label }}</h5>
+                <div class="center_content">
+                    {% for image in section.images.all %}
+                        {% thumbnail image.image "130x130" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.image.alt_text }}">
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+        {% if detail.video_url %}
+            <h4>Video</h4>
+            <div class="center_content">
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}
+
+{% block extrascript %}
+{% endblock %}

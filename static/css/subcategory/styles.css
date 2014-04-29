@@ -15,6 +15,10 @@
 	position: relative;
 }
 
+.detail_link {
+    cursor: pointer;
+}
+
 #images {
     text-align: center;
 }

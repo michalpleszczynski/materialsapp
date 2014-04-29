@@ -1,0 +1,9 @@
+{% extends 'partials/detail/detail.html' %}
+
+{% block extrascript %}
+<script>
+    document.title = 'Materials and Processes - Form';
+    var state = {html: document.getElementById("content").innerHTML};
+    history.pushState(state, '', '/form/detail/{{ detail.id }}/');
+</script>
+{% endblock %}
