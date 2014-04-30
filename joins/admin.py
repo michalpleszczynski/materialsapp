@@ -2,10 +2,11 @@ from django.contrib import admin
 
 from core.admin import DetailAdmin, SubcategoryAdmin
 from .models import JoinSubcategory, JoinDetail
+from .forms import JoinSubcategoryForm
 
 
 class JoinSubcategoryAdmin(SubcategoryAdmin):
-    pass
+    form = JoinSubcategoryForm
 
 admin.site.register(JoinSubcategory, JoinSubcategoryAdmin)
 

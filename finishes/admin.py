@@ -2,10 +2,11 @@ from django.contrib import admin
 
 from core.admin import SubcategoryAdmin, DetailAdmin
 from .models import FinishDetail, FinishSubcategory
+from .forms import FinishSubcategoryForm
 
 
 class FinishSubcategoryAdmin(SubcategoryAdmin):
-    pass
+    form = FinishSubcategoryForm
 
 admin.site.register(FinishSubcategory, FinishSubcategoryAdmin)
 

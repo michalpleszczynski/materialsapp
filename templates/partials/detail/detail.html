@@ -8,7 +8,7 @@
 {% block content %}
     <section id="detail">
         <h3>{{ detail.name }}</h3>
-        <p id="caption">{{ detail.caption|linebreaks }}</p>
+        <div id="caption">{{ detail.caption|linebreaks }}</div>
         <ul id="facts">{{ detail.facts|safe }}</ul>
         {% if detail.title_image %}
             {% thumbnail detail.title_image.image "600x480" crop="center" as im %}

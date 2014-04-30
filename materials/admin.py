@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from core.admin import CategoryAdmin, SubcategoryAdmin, DetailAdmin, DetailSectionInline
 from .models import Material, MaterialDetail, MaterialSubcategory
+from .forms import MaterialSubcategoryForm
 
 
 class MaterialAdmin(CategoryAdmin):
@@ -11,7 +12,7 @@ admin.site.register(Material, MaterialAdmin)
 
 
 class MaterialSubcategoryAdmin(SubcategoryAdmin):
-    pass
+    form = MaterialSubcategoryForm
 
 admin.site.register(MaterialSubcategory, MaterialSubcategoryAdmin)
 

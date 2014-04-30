@@ -37,15 +37,6 @@ class CategoryAdmin(admin.ModelAdmin):
 class SubcategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'active')
     list_filter = ('name',)
-    form = SubcategoryForm
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        for field in ('details',):
-            if db_field.name == field:
-                field_name = ' '.join(field.split())
-                kwargs['widget'] = FilteredSelectMultiple(field_name, False)
-        return super(SubcategoryAdmin, self).formfield_for_manytomany(
-            db_field, request, **kwargs)
 
 
 class DetailSectionInline(admin.TabularInline):

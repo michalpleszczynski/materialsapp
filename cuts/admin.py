@@ -2,10 +2,11 @@ from django.contrib import admin
 
 from core.admin import SubcategoryAdmin, DetailAdmin
 from .models import CutDetail, CutSubcategory
+from .forms import CutSubcategoryForm
 
 
 class CutSubcategoryAdmin(SubcategoryAdmin):
-    pass
+    form = CutSubcategoryForm
 
 admin.site.register(CutSubcategory, CutSubcategoryAdmin)
 
