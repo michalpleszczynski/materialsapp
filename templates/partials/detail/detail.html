@@ -9,12 +9,14 @@
     <section id="detail">
         <h3>{{ detail.name }}</h3>
         <div id="caption">{{ detail.caption|linebreaks }}</div>
-        <ul id="facts">{{ detail.facts|safe }}</ul>
-        {% if detail.title_image %}
-            {% thumbnail detail.title_image.image "600x480" crop="center" as im %}
-                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
-            {% endthumbnail %}
-        {% endif %}
+        <div>
+            <ul id="facts">{{ detail.facts|safe }}</ul>
+            {% if detail.title_image %}
+                {% thumbnail detail.title_image.image "600x480" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
+                {% endthumbnail %}
+            {% endif %}
+        </div>
         {% for section in detail.sections.active %}
             <div class="detail_image_section">
                 <h5>{{ section.label }}</h5>

@@ -1,11 +1,10 @@
 # coding: utf-8
-import json
-
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
+from core.ajax import page_change_routine
 from .models import Material, MaterialSubcategory, MaterialDetail
 
 
@@ -15,31 +14,26 @@ def get_materials(request):
     render = render_to_string('partials/category/material_list.html', {'materials': materials})
 
     dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    dajax.script('set_active_link("#materials_link");')
+    page_change_routine(dajax, render, 'materials_link')
     return dajax.json()
 
 
 @dajaxice_register
-def get_subcategories(request):
-    material_id = json.loads(request.POST.get('argv'))['material_id']
-    subcategories = MaterialSubcategory.objects.filter(categories=material_id)
+def get_subcategories(request, material_id):
+    subcategories = MaterialSubcategory.objects.filter(categories=int(material_id))
     render = render_to_string('partials/subcategory/material_subcategory_list.html',
                               {'subcategories': subcategories, 'material_id': material_id})
 
     dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    dajax.script('set_active_link("#materials_link");')
+    page_change_routine(dajax, render, 'materials_link')
     return dajax.json()
 
 
 @dajaxice_register
-def get_detail(request):
-    detail_id = int(json.loads(request.POST.get('argv'))['detail_id'])
-    detail = MaterialDetail.objects.get(pk=detail_id)
+def get_detail(request, detail_id):
+    detail = MaterialDetail.objects.get(pk=int(detail_id))
     render = render_to_string('partials/detail/material_detail.html', {'detail': detail})
 
     dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    dajax.script('set_active_link("#materials_link");')
+    page_change_routine(dajax, render, 'materials_link')
     return dajax.json()

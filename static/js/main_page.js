@@ -4,9 +4,10 @@ function set_active_link(selector){
 }
 
 $(window).scroll(function() {
-    if($(window).scrollTop() + $(window).height() > 0.75*$(document).height()) {
-        $('#bottom_box').removeClass('transparent');
-    } else if ($(window).scrollTop() + $(window).height() <= 0.75*$(document).height()) {
+    var position = $(window).height() - $(window).scrollTop();
+    if(position > 0.75*$(document).height()) {
         $('#bottom_box').addClass('transparent');
+    } else if (position <= 0.75*$(document).height()) {
+        $('#bottom_box').removeClass('transparent');
     }
 });

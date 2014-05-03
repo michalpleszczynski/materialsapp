@@ -1,6 +1,6 @@
 #caption {
-	width: 60%;
 	display: inline-block;
+    margin-bottom: 10px;
 }
 
 #facts {
@@ -16,4 +16,8 @@
 
 .center_content {
 	text-align: center;
+}
+
+.detail_image_section {
+    margin-top: 20px;
 }

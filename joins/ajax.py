@@ -1,11 +1,10 @@
 # coding: utf-8
-import json
-
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
 from django.template.loader import render_to_string
 
+from core.ajax import page_change_routine
 from .models import JoinSubcategory, JoinDetail
 
 
@@ -15,18 +14,15 @@ def get_subcategories(request):
     render = render_to_string('partials/subcategory/join_subcategory_list.html', {'subcategories': subcategories})
 
     dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    dajax.script('set_active_link("#joins_link");')
+    page_change_routine(dajax, render, 'joins_link')
     return dajax.json()
 
 
 @dajaxice_register
-def get_detail(request):
-    detail_id = int(json.loads(request.POST.get('argv'))['detail_id'])
-    detail = JoinDetail.objects.get(pk=detail_id)
+def get_detail(request, detail_id):
+    detail = JoinDetail.objects.get(pk=int(detail_id))
     render = render_to_string('partials/detail/join_detail.html', {'detail': detail})
 
     dajax = Dajax()
-    dajax.assign('#content', 'innerHTML', render)
-    dajax.script('set_active_link("#joins_link");')
+    page_change_routine(dajax, render, 'joins_link')
     return dajax.json()
