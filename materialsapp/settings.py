@@ -4,7 +4,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-DEBUG = True
+DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
 TEMPLATE_DEBUG = True
 
