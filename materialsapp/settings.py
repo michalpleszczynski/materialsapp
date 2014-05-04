@@ -60,7 +60,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'materialsapp',
         'USER': 'ashlee',
-        'PASSWORD': os.environ['DBPASS'],
+        'PASSWORD': os.environ.get('DBPASS') or '',
         'HOST': 'localhost',
         'PORT': ''
     }
