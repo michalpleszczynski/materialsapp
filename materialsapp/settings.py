@@ -8,7 +8,7 @@ DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -157,5 +157,14 @@ if not DEBUG:
     STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STATIC_BUCKET_NAME
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
-    # breaks urlpatterns if True
-    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+# breaks urlpatterns if True
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+dbconfig = dj_database_url.config()
+if dbconfig:
+    DATABASES['default'] = dbconfig
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
