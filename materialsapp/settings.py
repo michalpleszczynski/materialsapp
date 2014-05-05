@@ -1,14 +1,63 @@
 import os
 
+from django.core.exceptions import ImproperlyConfigured
+
+
+def get_env_variable(var_name):
+    """ Get the environment variable or return exception """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set the %s environment variable" % var_name
+        raise ImproperlyConfigured(error_msg)
+
+
+DEBUG = get_env_variable("DJANGO_DEBUG")
+if DEBUG == 1 or DEBUG == '1' or DEBUG == 'True':
+    DEBUG = True
+else:
+    DEBUG = False
+
+LOCAL_DEV = get_env_variable("DJANGO_LOCAL_DEV")
+if LOCAL_DEV == 1 or LOCAL_DEV == '1' or LOCAL_DEV == 'True':
+    LOCAL_DEV = True
+else:
+    LOCAL_DEV = False
+
+DATABASES = {}
+
+if LOCAL_DEV:
+    ALLOWED_HOSTS = ['*']  # useful when testing with DEBUG = FALSE
+    INTERNAL_IPS = ('127.0.0.1',)  # sets local IPS needed for DEBUG_TOOLBAR and other items.
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'materialsapp',
+            'USER': 'ashlee',
+            'PASSWORD': 'ashleepw',
+            'HOST': 'localhost',
+            'PORT': ''
+        }
+    }
+
+else:
+    # Parse database configuration from $DATABASE_URL
+    import dj_database_url
+    dbconfig = dj_database_url.config()
+    if dbconfig:
+        DATABASES['default'] = dbconfig
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure()
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = get_env_variable('SECRET_KEY')
 
-DEBUG = False
 THUMBNAIL_DEBUG = DEBUG
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = ['*']
+TEMPLATE_DEBUG = DEBUG
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -55,17 +104,6 @@ ROOT_URLCONF = 'materialsapp.urls'
 
 WSGI_APPLICATION = 'materialsapp.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'materialsapp',
-        'USER': 'ashlee',
-        'PASSWORD': os.environ.get('DBPASS') or '',
-        'HOST': 'localhost',
-        'PORT': ''
-    }
-}
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -86,12 +124,13 @@ STATIC_ROOT = BASE_DIR + '/collected_static/'
 
 STATICFILES_FINDERS = DEFAULT_SETTINGS.STATICFILES_FINDERS + ('dajaxice.finders.DajaxiceFinder',)
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'), MEDIA_ROOT)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
 import sqlparse
 import logging
+
 
 class sqlformatter(logging.Formatter):
     def format(self, record):
@@ -143,8 +182,8 @@ LOGGING = {
 }
 
 
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
+AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 
 if not DEBUG:
     DEFAULT_FILE_STORAGE = 'core.storage.DefaultStorage'
@@ -159,12 +198,3 @@ if not DEBUG:
 
 # breaks urlpatterns if True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-dbconfig = dj_database_url.config()
-if dbconfig:
-    DATABASES['default'] = dbconfig
-
-# Honor the 'X-Forwarded-Proto' header for request.is_secure()
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

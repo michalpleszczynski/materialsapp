@@ -8,10 +8,15 @@
 	float: right;
 }
 
-#facts li{
+#facts li {
 	display: list-item;
 	list-style-type: disc;
 	margin: 5px;
+}
+
+#facts a {
+    text-decoration: underline;
+    color: blue;
 }
 
 .center_content {

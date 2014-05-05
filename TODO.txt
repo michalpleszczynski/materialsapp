@@ -1,3 +1,4 @@
 1. when pressing back arrow from detail to subcestion (i.e. form) links are not appended to images and current
 top link is not highlighted - extra scripts are not executed on popstate. Solution: wrap onpopstate in base.html
 into extra block and override it in other templates.
+2. the image fields have max_lenght 100 on filename, validate in admin - now it throws exception instead

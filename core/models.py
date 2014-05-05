@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 
 from django.db import models
@@ -90,7 +91,10 @@ class DetailSection(BaseModel):
 class Image(models.Model):
     image = ImageField(
         null=False, blank=False,
-        upload_to=lambda instance, filename: '{0}/{1}'.format(datetime.now().strftime('%Y/%m/%d'), filename))
+        upload_to=lambda instance, filename: '{0}/{1}'.format(
+            datetime.now().strftime('%Y/%m/%d'), filename + '.' + str(int(time.mktime(datetime.now().timetuple())))
+        )
+    )
     alt_text = models.CharField(max_length=50, null=True, blank=True)
     figcaption = models.CharField('Figure caption', max_length=150, null=True, blank=True)
     url = models.URLField(max_length=255, null=True, blank=True)
