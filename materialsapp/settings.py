@@ -43,6 +43,8 @@ if LOCAL_DEV:
 
 else:
     # Parse database configuration from $DATABASE_URL
+    ALLOWED_HOSTS = ['materialsapp.herokuapp.com']
+
     import dj_database_url
     dbconfig = dj_database_url.config()
     if dbconfig:
