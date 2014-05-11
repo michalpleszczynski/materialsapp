@@ -197,6 +197,7 @@ if not DEBUG:
     MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
     STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STATIC_BUCKET_NAME
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+    AWS_S3_SECURE_URLS = False
 
 # breaks urlpatterns if True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False

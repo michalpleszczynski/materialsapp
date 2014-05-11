@@ -90,7 +90,7 @@ class DetailSection(BaseModel):
 
 class Image(models.Model):
     image = ImageField(
-        null=False, blank=False,
+        null=False, blank=False, max_length=255,
         upload_to=lambda instance, filename: '{0}/{1}'.format(
             datetime.now().strftime('%Y/%m/%d'), filename + '.' + str(int(time.mktime(datetime.now().timetuple())))
         )

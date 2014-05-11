@@ -1,4 +1,4 @@
-function set_active_link(selector){
+function setActiveLink(selector){
     $('#menu a').removeClass('active');
     $(selector).addClass('active');
 }
