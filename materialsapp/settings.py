@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'dajaxice',
     'dajax',
     'debug_toolbar',
+    'embed_video',
     'sorl.thumbnail',
     'storages',
     'south'

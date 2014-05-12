@@ -1,9 +1,8 @@
+{% extends base_template %}
+
 {% load staticfiles %}
 {% load thumbnail %}
-
-{% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
-{% endblock %}
+{% load embed_video_tags %}
 
 {% block content %}
     <section id="detail">
@@ -32,10 +31,12 @@
         {% if detail.video_url %}
             <h4>Video</h4>
             <div class="center_content">
+                {{ detail.video_url|embed:'560x315' }}
             </div>
         {% endif %}
     </section>
-{% endblock %}
-
-{% block extrascript %}
+    <script>
+        ajaxifyLinks();
+        setActiveLink('{{ active_link }}');
+    </script>
 {% endblock %}

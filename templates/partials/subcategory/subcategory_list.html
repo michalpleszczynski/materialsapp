@@ -1,10 +1,9 @@
+{% extends base_template %}
+
 {% load staticfiles %}
 {% load thumbnail %}
 
-{% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/subcategory/styles.css' %}">
-{% endblock %}
-
+{% block content %}
 <section id="subcategory_list">
     {% for subcategory in subcategories %}
         <h3 class="subcategory_name">{{ subcategory.name }}</h3>
@@ -12,7 +11,7 @@
         <div id="images">
             {% for detail in subcategory.details.active %}
                 <div class="detail_image">
-                    <a class="detail_link" id="{{ detail.id }}"><span class="link_span"></span></a>
+                    <a class="detail_link" href="{% url detail_url detail.id %}"><span class="link_span"></span></a>
                     {% if detail.title_image %}
                         {% thumbnail detail.title_image.image "130x130" crop="center" as im %}
                             <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
@@ -24,6 +23,8 @@
         </div>
     {% endfor %}
 </section>
-
-{% block extrascript %}
+<script>
+    ajaxifyLinks();
+    setActiveLink('{{ active_link }}');
+</script>
 {% endblock %}

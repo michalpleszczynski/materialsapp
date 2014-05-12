@@ -1,6 +1,16 @@
+function ajaxifyLinks(){
+    // Capture all the links to push their url to the history stack and trigger the StateChange Event
+    $('a').click(function(evt) {
+        evt.preventDefault();
+        History.pushState(null, $(this).text(), $(this).attr('href'));
+    });
+}
+
 function setActiveLink(selector){
     $('#menu a').removeClass('active');
-    $(selector).addClass('active');
+    if (selector){
+        $(selector).addClass('active');
+    }
 }
 
 $(window).scroll(function() {

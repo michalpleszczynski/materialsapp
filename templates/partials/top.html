@@ -7,26 +7,27 @@
 
 <div id="social_media_bar">
     <ul>
-        <li><img src="{% static 'images/social_media/twitter.png'%}" alt="Twitter"></li>
-        <li><img src="{% static 'images/social_media/facebook.png'%}" alt="Facebook"></li>
-        <li><img src="{% static 'images/social_media/behance.png'%}" alt="Behance"></li>
-        <li><img src="{% static 'images/social_media/google+.png'%}" alt="Google Plus"></li>
-        <li><img src="{% static 'images/social_media/tumblr.png'%}" alt="Tumblr"></li>
+        <li><img src="{% static 'images/social_media/twitter.png' %}" alt="Twitter"></li>
+        <li><img src="{% static 'images/social_media/facebook.png' %}" alt="Facebook"></li>
+        <li><img src="{% static 'images/social_media/behance.png' %}" alt="Behance"></li>
+        <li><img src="{% static 'images/social_media/google+.png' %}" alt="Google Plus"></li>
+        <li><img src="{% static 'images/social_media/tumblr.png' %}" alt="Tumblr"></li>
     </ul>
 </div>
 <section id="top_bar">
     <div id="title_text">
-        <a href="{% url 'home' %}"><span class="link_span"></span></a>
-        <h1>Materials And Processes</h1>
+        <a href="{% url 'home' %}"><span class="link_span"></span>
+            <h1>Materials And Processes</h1>
+        </a>
         <h3>Ashlee Wlasiuk</h3>
     </div>
     <nav id="menu" class="center_text">
         <ul>
-            <li><a id="forms_link" class="clickable" onclick="Dajaxice.forms.get_subcategories(Dajax.process);">Form</a></li>
-            <li><a id="cuts_link" class="clickable" onclick="Dajaxice.cuts.get_subcategories(Dajax.process);">Cut</a></li>
-            <li><a id="joins_link" class="clickable" onclick="Dajaxice.joins.get_subcategories(Dajax.process);">Join</a></li>
-            <li><a id="finishes_link" class="clickable" onclick="Dajaxice.finishes.get_subcategories(Dajax.process);">Finish</a></li>
-            <li><a id="materials_link" class="clickable" onclick="Dajaxice.materials.get_materials(Dajax.process);">Materials</a></li>
+            <li><a id="forms_link" href="/form">Form</a></li>
+            <li><a id="cuts_link" href="/cut">Cut</a></li>
+            <li><a id="joins_link" href="/join">Join</a></li>
+            <li><a id="finishes_link" href="/finish">Finish</a></li>
+            <li><a id="materials_link" href="/materials">Materials</a></li>
         </ul>
     </nav>
 </section>

@@ -1,21 +1,26 @@
-<!DOCTYPE html lang="en">
+<!DOCTYPE html>
 <head>
     {% load staticfiles %}
     {% load dajaxice_templatetags %}
     <meta charset="utf-8">
+    <meta lang="en">
     <title>Materials and Processes</title>
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/stylesheet.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/category/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/subcategory/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="{% static 'dajax/jquery.dajax.core.js' %}"></script>
+    <script src="{% static 'js/history/html4+html5/jquery.history.js' %}"></script>
     <script src="{% static 'js/main_page.js' %}"></script>
     {% dajaxice_js_import %}
     {% block extrahead %}
     {% endblock %}
 </head>
 
-<body {% if ajax_function %}onload="{{ ajax_function }}"{% endif %}>
+<body>
     {% include 'partials/top.html' %}
 
     <div id="content">
@@ -32,16 +37,31 @@
     {% include 'partials/bottom.html' %}
     {% block extrascript %}
     <script>
-        var state = {html: document.getElementById("content").innerHTML};
-        history.pushState(state, '', '');
+        $(function() {
+
+            // Prepare
+            var History = window.History; // Note: We are using a capital H instead of a lower h
+            if ( !History.enabled ) {
+                 // History.js is disabled for this browser.
+                 // This is because we can optionally choose to support HTML4 browsers or not.
+                return false;
+            }
+
+            // Bind to StateChange Event
+            History.Adapter.bind(window,'statechange',function() {
+                var State = History.getState();
+                if (State){
+                    $('#content').load(State.url);
+                }
+            });
+
+            // Capture all the links to push their url to the history stack and trigger the StateChange Event
+            $('a').click(function(evt) {
+                evt.preventDefault();
+                History.pushState(null, $(this).text(), $(this).attr('href'));
+            });
+        });
     </script>
     {% endblock %}
-    <script>
-        window.onpopstate = function(e){
-            if(e.state){
-                document.getElementById("content").innerHTML = e.state.html;
-            }
-            setActiveLink('');
-        };
-    </script>
+
 </body>

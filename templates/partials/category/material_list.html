@@ -1,27 +1,24 @@
+{% extends base_template %}
+
 {% load staticfiles %}
 {% load thumbnail %}
 
-{% block extrahead %}
-    <link rel="stylesheet" href="{% static 'css/category/styles.css' %}">
-{% endblock %}
-
+{% block content %}
 <section id="list">
-    {% for material in materials %}
-        <div class="clickable material_image" onclick="Dajaxice.materials.get_subcategories(Dajax.process, {'material_id': {{ material.id }} });">
-            {% if material.image %}
-                {% thumbnail material.image.image "250x250" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ material.image.alt_text }}">
+    {% for category in categories %}
+        <div class="category_image">
+            <a href="{% url 'material_subcategories' category.id %}"><span class="link_span"></span></a>
+            {% if category.image %}
+                {% thumbnail category.image.image "250x250" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ category.image.alt_text }}">
                 {% endthumbnail %}
             {% endif %}
-            <h5>{{ material.name }}</h5>
+            <h5>{{ category.name }}</h5>
         </div>
     {% endfor %}
 </section>
-
-{% block extrascript %}
 <script>
-    document.title = 'Materials and Processes - Materials';
-    var state = {html: document.getElementById("content").innerHTML};
-    history.pushState(state, '', '/materials/');
+    ajaxifyLinks();
+    setActiveLink('{{ active_link }}');
 </script>
 {% endblock %}

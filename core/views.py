@@ -1,6 +1,8 @@
 import logging
 
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.template.loader import render_to_string
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -48,13 +50,27 @@ def home(request):
             return HttpResponseRedirect(reverse('home'))
     else:
         form = ContactForm()
-    return render(request, 'index.html', {'posts':blog_posts['posts'], 'form': form, 'gallery': images})
+    data = {'posts': blog_posts['posts'], 'form': form, 'gallery': images, 'base_template': 'base.html'}
+    if request.is_ajax():
+        data['base_template'] = 'ajax.html'
+        html = render_to_string('index.html', data)
+        return HttpResponse(html, 'text/html')
+    return render(request, 'index.html', data)
 
 
-def subcategory(request, ajax_function):
-    return render(request, 'index.html', {'ajax_function': ajax_function})
+def subcategory(request, **data):
+    if request.is_ajax():
+        data['base_template'] = 'ajax.html'
+        html = render_to_string('partials/subcategory/subcategory_list.html', data)
+        return HttpResponse(html, content_type='text/html')
+    return render(request, 'partials/subcategory/subcategory_list.html', data)
 
 
-def detail(request, id):
-    detail_obj = Detail.objects.get(pk=id)
-    return render(request, 'detail/detail.html', {'detail': detail_obj})
+def detail(request, detail_id, **data):
+    detail_obj = Detail.objects.get(pk=detail_id)
+    data['detail'] = detail_obj
+    if request.is_ajax():
+        data['base_template'] = 'ajax.html'
+        html = render_to_string('partials/detail/detail.html', data)
+        return HttpResponse(html, content_type='text/html')
+    return render(request, 'partials/detail/detail.html', data)
