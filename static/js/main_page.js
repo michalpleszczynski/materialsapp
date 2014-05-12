@@ -1,6 +1,6 @@
 function ajaxifyLinks(){
     // Capture all the links to push their url to the history stack and trigger the StateChange Event
-    $('a').click(function(evt) {
+    $('a').not('.external_link').click(function(evt) {
         evt.preventDefault();
         History.pushState(null, $(this).text(), $(this).attr('href'));
     });

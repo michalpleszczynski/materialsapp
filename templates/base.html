@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <head>
     {% load staticfiles %}
-    {% load dajaxice_templatetags %}
     <meta charset="utf-8">
     <meta lang="en">
     <title>Materials and Processes</title>
@@ -12,10 +11,8 @@
     <link rel="stylesheet" href="{% static 'css/subcategory/styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="{% static 'dajax/jquery.dajax.core.js' %}"></script>
     <script src="{% static 'js/history/html4+html5/jquery.history.js' %}"></script>
     <script src="{% static 'js/main_page.js' %}"></script>
-    {% dajaxice_js_import %}
     {% block extrahead %}
     {% endblock %}
 </head>
@@ -56,7 +53,7 @@
             });
 
             // Capture all the links to push their url to the history stack and trigger the StateChange Event
-            $('a').click(function(evt) {
+            $('a').not('.external_link').click(function(evt) {
                 evt.preventDefault();
                 History.pushState(null, $(this).text(), $(this).attr('href'));
             });

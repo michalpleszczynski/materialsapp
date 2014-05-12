@@ -26,3 +26,21 @@
 .detail_image_section {
     margin-top: 20px;
 }
+
+.section_image,
+.title_image {
+	display: inline-block;
+	margin: 10px;
+	text-align: center;
+	position: relative;
+}
+
+.section_image {
+    width: 130px;
+	height: 130px;
+}
+
+.title_image {
+    width: 600px;
+    height: 480px;
+}

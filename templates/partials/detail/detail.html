@@ -11,9 +11,12 @@
         <div>
             <ul id="facts">{{ detail.facts|safe }}</ul>
             {% if detail.title_image %}
-                {% thumbnail detail.title_image.image "600x480" crop="center" as im %}
-                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
-                {% endthumbnail %}
+                <div class="title_image">
+                    <a class="external_link" href="{{ detail.title_image.image.url }}"><span class="link_span"></span></a>
+                    {% thumbnail detail.title_image.image "600x480" crop="center" as im %}
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ detail.title_image.alt_text }}">
+                    {% endthumbnail %}
+                </div>
             {% endif %}
         </div>
         {% for section in detail.sections.active %}
@@ -21,9 +24,12 @@
                 <h5>{{ section.label }}</h5>
                 <div class="center_content">
                     {% for image in section.images.all %}
-                        {% thumbnail image.image "130x130" crop="center" as im %}
-                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.image.alt_text }}">
-                        {% endthumbnail %}
+                        <div class="section_image">
+                            <a class="external_link" href="{{ image.image.url }}"><span class="link_span"></span></a>
+                            {% thumbnail image.image "130x130" crop="center" as im %}
+                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ image.image.alt_text }}">
+                            {% endthumbnail %}
+                        </div>
                     {% endfor %}
                 </div>
             </div>
