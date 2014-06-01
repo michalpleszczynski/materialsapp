@@ -1,7 +1,10 @@
+# coding: utf-8
+from __future__ import unicode_literals
 import time
 from datetime import datetime
 
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 from django_extensions.db.models import TimeStampedModel
 from sorl.thumbnail import ImageField
@@ -25,6 +28,7 @@ class BaseModel(TimeStampedModel):
         abstract = True
 
 
+@python_2_unicode_compatible
 class Category(BaseModel):
     name = models.CharField(max_length=30, null=False, blank=False)
     image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
@@ -37,25 +41,21 @@ class Category(BaseModel):
             return ''
     image_preview.allow_tags = True
 
-    def __unicode__(self):
-        return self.name
-
     def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Subcategory(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
     caption = models.CharField(max_length=500, null=True, blank=True)
     details = models.ManyToManyField('Detail', null=True, blank=True)
 
-    def __unicode__(self):
-        return self.name
-
     def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class Detail(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
     title_image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
@@ -70,24 +70,20 @@ class Detail(BaseModel):
             return ''
     title_image_preview.allow_tags = True
 
-    def __unicode__(self):
-        return self.name
-
     def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class DetailSection(BaseModel):
     label = models.CharField(max_length=30, null=True, blank=True)
     detail = models.ForeignKey(Detail, null=False, blank=False, related_name='sections')
 
-    def __unicode__(self):
-        return self.label
-
     def __str__(self):
         return self.label
 
 
+@python_2_unicode_compatible
 class Image(models.Model):
     image = ImageField(
         null=False, blank=False, max_length=255,
@@ -98,12 +94,6 @@ class Image(models.Model):
     alt_text = models.CharField(max_length=50, null=True, blank=True)
     figcaption = models.CharField('Figure caption', max_length=150, null=True, blank=True)
     url = models.URLField(max_length=255, null=True, blank=True)
-
-    def image_name(self):
-        return self.image.name
-
-    def __unicode__(self):
-        return self.image.name
 
     def __str__(self):
         return self.image.name

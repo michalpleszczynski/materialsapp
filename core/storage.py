@@ -1,4 +1,5 @@
 # coding: utf-8
+from __future__ import unicode_literals
 from storages.backends.s3boto import S3BotoStorage
 from django.conf import settings
 

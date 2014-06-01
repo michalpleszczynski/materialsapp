@@ -1,3 +1,6 @@
+# coding: utf-8
+from __future__ import unicode_literals
+
 from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 
 from django.conf.urls import patterns, include, url

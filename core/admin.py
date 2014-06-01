@@ -1,10 +1,12 @@
+# coding: utf-8
+from __future__ import unicode_literals
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple, RelatedFieldWidgetWrapper
 from django.core import urlresolvers
 
 from sorl.thumbnail.admin import AdminImageMixin
 
-from .forms import SubcategoryForm, DetailForm
+from .forms import DetailForm
 from .models import DetailSection, Image, DetailSectionImage, Detail, Category
 from .widgets import AdminRelatedImageWidget
 
@@ -91,6 +93,6 @@ class DetailAdmin(admin.ModelAdmin):
 
 
 class ImageAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ('image_name',)
+    list_display = ('__str__',)
 
 admin.site.register(Image, ImageAdmin)
