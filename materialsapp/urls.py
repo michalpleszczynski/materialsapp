@@ -18,6 +18,7 @@ urlpatterns = patterns('',
 
     url(r'^$', 'core.views.home', name='home'),
     url(r'^view_detail/(?P<id>\w+)$', 'core.views.detail', name='detail'),
+    url(r'^search/', 'core.views.search', name='search'),
     url(r'^materials/', include('materials.urls')),
     url(r'^join/', include('joins.urls')),
     url(r'^cut/', include('cuts.urls')),

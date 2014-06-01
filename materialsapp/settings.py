@@ -38,7 +38,7 @@ if LOCAL_DEV:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'materialsapp',
             'USER': 'ashlee',
-            'PASSWORD': 'ashleepw',
+            'PASSWORD': 'ashlee',
             'HOST': 'localhost',
             'PORT': ''
         }
@@ -87,7 +87,7 @@ MY_APPS = (
     'finishes',
     'forms',
     'joins',
-    'materials'
+    'materials',
 )
 
 INSTALLED_APPS += MY_APPS
@@ -187,7 +187,6 @@ LOGGING = {
     }
 }
 
-
 AWS_ACCESS_KEY_ID = get_env_variable('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = get_env_variable('AWS_SECRET_ACCESS_KEY')
 
@@ -205,3 +204,12 @@ if not DEBUG:
 
 # breaks urlpatterns if True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+# load local_settings
+import platform
+try:
+    execfile('%s/materialsapp/local_settings/%s.py' % (
+        BASE_DIR, 'settings-%s' % platform.node().replace('.', '_'))
+    )
+except Exception, e:
+    logging.exception(e)
