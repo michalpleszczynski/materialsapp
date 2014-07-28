@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django import forms
 
-from .models import Subcategory
+from .models import Subcategory, Detail
 
 
 class SubcategoryForm(forms.ModelForm):
@@ -10,14 +10,14 @@ class SubcategoryForm(forms.ModelForm):
     class Meta:
         model = Subcategory
         widgets = {
-            'caption': forms.Textarea(),
+            'caption': forms.Textarea(attrs={'rows': 5, 'cols': 100}),
         }
 
 
 class DetailForm(forms.ModelForm):
 
     class Meta:
-        model = Subcategory
+        model = Detail
         widgets = {
             'caption': forms.Textarea(attrs={'rows': 10, 'cols': 150}),
             'facts': forms.Textarea(attrs={'rows': 10, 'cols': 150}),

@@ -1,0 +1,14 @@
+<section id="search-section">
+    <form id="search-form" ng-submit="submit()">
+        <input id="query" ng-model="text" type="text" placeholder="Search..." required/>
+        <input type="submit" value="Search">
+    </form>
+    <div id="results">
+        <h4 ng-hide="results.length">Sorry, no results.</h4>
+        <li>
+            <ul ng-repeat="result in results">
+                <a ng-href="{{ '#/' + result.type + '/detail/' + result.id + '/' }}">{{ result.name }}</a>
+            </ul>
+        </li>
+    </div>
+</section>

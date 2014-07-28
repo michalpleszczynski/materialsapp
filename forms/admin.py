@@ -5,16 +5,29 @@ from django.contrib import admin
 
 from core.admin import SubcategoryAdmin, DetailAdmin
 from .models import FormDetail, FormSubcategory
-from .forms import FormSubcategoryForm
 
 
 class FormSubcategoryAdmin(SubcategoryAdmin):
-    form = FormSubcategoryForm
+
+    def get_form(self, request, obj=None, **kwargs):
+        from . import DETAIL_TYPE
+        form = super(FormSubcategoryAdmin, self).get_form(request, obj, **kwargs)
+        if 'category' in form.base_fields:
+            field = form.base_fields['category']
+            field.queryset = field.queryset.filter(type=DETAIL_TYPE)
+        return form
 
 admin.site.register(FormSubcategory, FormSubcategoryAdmin)
 
 
 class FormDetailAdmin(DetailAdmin):
-    pass
+
+    def get_form(self, request, obj=None, **kwargs):
+        from . import DETAIL_TYPE
+        form = super(FormDetailAdmin, self).get_form(request, obj, **kwargs)
+        if 'subcategory' in form.base_fields:
+            field = form.base_fields['subcategory']
+            field.queryset = field.queryset.filter(type=DETAIL_TYPE)
+        return form
 
 admin.site.register(FormDetail, FormDetailAdmin)

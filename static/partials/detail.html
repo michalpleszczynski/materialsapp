@@ -1,0 +1,30 @@
+<section id="detail">
+    <h3>{{ detail.name }}</h3>
+    <div id="caption">{{ detail.caption}}</div>
+    <div>
+        <ul id="facts" data-ng-bind-html="detail.facts"></ul>
+        <div class="title-image">
+            <a class="external-link" href="{{ detail.title_image.full_image }}"><span class="link-span"></span></a>
+            <img ng-src="{{ detail.title_image.thumb }}" />
+        </div>
+    </div>
+    <div ng-repeat="section in detail.sections">
+        <div class="detail-image-section">
+            <h5>{{ section.label }}</h5>
+            <div class="center-content">
+                <span ng-repeat="image in section.images">
+                    <div class="section-image">
+                        <a class="external-link" href="{{ image.full_image }}"><span class="link-span"></span></a>
+                        <img ng-src="{{ image.thumb }}" />
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div ng-show="detail.code">
+        <h4>Video</h4>
+        <div class="center-content">
+            <youtube code="detail.code"></youtube>
+        </div>
+    </div>
+</section>

@@ -1,11 +1,57 @@
-{% extends base_template %}
+<!DOCTYPE html>
+<html ng-app="materialsApp">
+    <head xmlns="http://www.w3.org/1999/html">
+        {% load staticfiles %}
+        <meta charset="utf-8">
+        <meta lang="en">
+        <title>Materials and Processes</title>
+        <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/stylesheet.css' %}">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/category/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/subcategory/styles.css' %}">
+        <link rel="stylesheet" href="{% static 'css/detail/styles.css' %}">
+        <script>
+            var staticUrl = '{% static '' %}';
+            var partialsUrl = '{% static 'partials/' %}';
+            var apiUrl = '/api/v1/';
 
-{% block content %}
-<script>
-    setActiveLink('{{ active_link }}');
-</script>
-{% endblock %}
+            function getAPIUrl(url) {
+                return apiUrl + url;
+            }
 
-{% block extrascript %}
-    {{ block.super }}
-{% endblock %}
+            function getPartialUrl(name) {
+                return partialsUrl + name;
+            }
+        </script>
+    </head>
+
+    <body>
+        <social-media-bar></social-media-bar>
+        <main-navigation></main-navigation>
+
+        <div id="content">
+            <div ng-view>
+            </div>
+        </div>
+
+        <footer class="center-text">
+            <p>© Ashlee Wlasiuk 2014<br>
+                All rights reserved
+            </p>
+        </footer>
+
+        <!--<info-contact-bar></info-contact-bar>-->
+
+        <script src="{% static 'js/angular.min.js' %}"></script>
+        <script src="{% static 'js/angular-route.min.js' %}"></script>
+
+        <script src="{% static 'js/app/app.js' %}"></script>
+        <script src="{% static 'js/app/services.js' %}"></script>
+        <script src="{% static 'js/app/controllers.js' %}"></script>
+        <script src="{% static 'js/app/directives.js' %}"></script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+    </body>
+</html>

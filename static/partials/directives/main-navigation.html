@@ -1,0 +1,32 @@
+<section id="top_bar">
+    <div id="title_text">
+        <a ng-href="#" ng-click="navigationCtrl.selectLink(0)"><span class="link-span"></span>
+            <h1>Materials And Processes</h1>
+        </a>
+        <h3>Ashlee Wlasiuk</h3>
+    </div>
+    <nav id="menu" class="center-text">
+        <ul>
+            <li>
+                <a id="forms-link" ng-href="#form" ng-click="navigationCtrl.selectLink(1)"
+                   ng-class="{ active:navigationCtrl.isSelected(1) }">Form</a>
+            </li>
+            <li>
+                <a id="cuts-link" ng-href="#cut" ng-click="navigationCtrl.selectLink(2)"
+                   ng-class="{ active:navigationCtrl.isSelected(2) }">Cut</a>
+            </li>
+            <li>
+                <a id="joins-link" ng-href="#join" ng-click="navigationCtrl.selectLink(3)"
+                   ng-class="{ active:navigationCtrl.isSelected(3) }">Join</a>
+            </li>
+            <li>
+                <a id="finishes-link" ng-href="#finish" ng-click="navigationCtrl.selectLink(4)"
+                   ng-class="{ active:navigationCtrl.isSelected(4) }">Finish</a>
+            </li>
+            <li>
+                <a id="materials-link" ng-href="#materials" ng-click="navigationCtrl.selectLink(5)"
+                   ng-class="{ active:navigationCtrl.isSelected(5) }">Materials</a>
+            </li>
+        </ul>
+    </nav>
+</section>

@@ -19,28 +19,28 @@
     color: blue;
 }
 
-.center_content {
+.center-content {
 	text-align: center;
 }
 
-.detail_image_section {
+.detail-image-section {
     margin-top: 20px;
 }
 
-.section_image,
-.title_image {
+.section-image,
+.title-image {
 	display: inline-block;
 	margin: 10px;
 	text-align: center;
 	position: relative;
 }
 
-.section_image {
+.section-image {
     width: 130px;
 	height: 130px;
 }
 
-.title_image {
+.title-image {
     width: 600px;
     height: 480px;
 }

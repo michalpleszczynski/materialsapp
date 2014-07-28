@@ -2,7 +2,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DEBUG_SQL = True
+DEBUG_SQL = False
 
 if DEBUG_SQL:
 

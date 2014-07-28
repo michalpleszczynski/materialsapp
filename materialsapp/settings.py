@@ -205,6 +205,10 @@ if not DEBUG:
 # breaks urlpatterns if True
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
+# recaptcha
+RECAPTCHA_PUBLIC = get_env_variable('RECAPTCHA_PUBLIC')
+RECAPTCHA_SECRET = get_env_variable('RECAPTCHA_SECRET')
+
 # load local_settings
 import platform
 try:

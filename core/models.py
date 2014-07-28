@@ -28,18 +28,36 @@ class BaseModel(TimeStampedModel):
         abstract = True
 
 
+class TypeManager(BaseManager):
+
+    def cuts(self):
+        from cuts import DETAIL_TYPE
+        return self.active().filter(type=DETAIL_TYPE)
+
+    def finishes(self):
+        from finishes import DETAIL_TYPE
+        return self.active().filter(type=DETAIL_TYPE)
+
+    def joins(self):
+        from joins import DETAIL_TYPE
+        return self.active().filter(type=DETAIL_TYPE)
+
+    def forms(self):
+        from forms import DETAIL_TYPE
+        return self.active().filter(type=DETAIL_TYPE)
+
+    def materials(self):
+        from materials import DETAIL_TYPE
+        return self.active().filter(type=DETAIL_TYPE)
+
+
 @python_2_unicode_compatible
 class Category(BaseModel):
     name = models.CharField(max_length=30, null=False, blank=False)
     image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
-    subcategories = models.ManyToManyField('Subcategory', null=True, blank=True, related_name='categories')
+    type = models.CharField(max_length=15, null=False, blank=True)
 
-    def image_preview(self):
-        if self.image:
-            return self.image.admin_image()
-        else:
-            return ''
-    image_preview.allow_tags = True
+    objects = TypeManager()
 
     def __str__(self):
         return self.name
@@ -49,7 +67,10 @@ class Category(BaseModel):
 class Subcategory(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
     caption = models.CharField(max_length=500, null=True, blank=True)
-    details = models.ManyToManyField('Detail', null=True, blank=True)
+    category = models.ForeignKey(Category, null=True, blank=True)
+    type = models.CharField(max_length=15, null=False, blank=True)
+
+    objects = TypeManager()
 
     def __str__(self):
         return self.name
@@ -58,17 +79,14 @@ class Subcategory(BaseModel):
 @python_2_unicode_compatible
 class Detail(BaseModel):
     name = models.CharField(max_length=60, null=False, blank=False)
-    title_image = models.OneToOneField('Image', null=True, blank=True, on_delete=models.SET_NULL)
+    title_image = models.OneToOneField('Image', null=True, blank=False, on_delete=models.SET_NULL)
     caption = models.CharField(max_length=2000)
     facts = models.CharField(max_length=1000)
     video_url = models.URLField(max_length=255, null=True, blank=True)
+    subcategory = models.ForeignKey(Subcategory, related_name='details')
+    type = models.CharField(max_length=15, null=False, blank=True)
 
-    def title_image_preview(self):
-        if self.title_image:
-            return self.title_image.admin_image()
-        else:
-            return ''
-    title_image_preview.allow_tags = True
+    objects = TypeManager()
 
     def __str__(self):
         return self.name

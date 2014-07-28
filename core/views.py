@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse
 from django.db import connection
 
 from . import SEARCH_TABLES
+from django.views.decorators.csrf import csrf_exempt
 from .forms import ContactForm
 from .models import Detail, Subcategory, Category
 
@@ -67,9 +68,9 @@ def home(request):
 def subcategory(request, **data):
     if request.is_ajax():
         data['base_template'] = 'ajax.html'
-        html = render_to_string('partials/subcategory/subcategory_list.html', data)
+        html = render_to_string('partials/subcategory/subcategory-list.html', data)
         return HttpResponse(html, content_type='text/html')
-    return render(request, 'partials/subcategory/subcategory_list.html', data)
+    return render(request, 'partials/subcategory/subcategory-list.html', data)
 
 
 def detail(request, detail_id, **data):
@@ -82,14 +83,15 @@ def detail(request, detail_id, **data):
     return render(request, 'partials/detail/detail.html', data)
 
 
+@csrf_exempt
 def search(request):
 
     def _text_search(term):
         results = []
         q_results = Detail.objects.extra(where=["name @@ plainto_tsquery('english', %s )"],
-                                        params=[term]).only('id', 'name')
+                                         params=[term]).only('id', 'name', 'type')
         for q in q_results:
-            results.append({'id': q.id, 'name': q.name})
+            results.append({'id': q.id, 'name': q.name, 'type': q.type})
         return results
 
     term = request.GET.get('q', None)

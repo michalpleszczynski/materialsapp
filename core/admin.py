@@ -6,7 +6,7 @@ from django.core import urlresolvers
 
 from sorl.thumbnail.admin import AdminImageMixin
 
-from .forms import DetailForm
+from .forms import DetailForm, SubcategoryForm
 from .models import DetailSection, Image, DetailSectionImage, Detail, Category
 from .widgets import AdminRelatedImageWidget
 
@@ -15,14 +15,6 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'active')
     list_filter = ('name',)
     change_form_template = 'admin/change_form_with_image.html'
-
-    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
-        for field in ('subcategories',):
-            if db_field.name == field:
-                field_name = ' '.join(field.split())
-                kwargs['widget'] = FilteredSelectMultiple(field_name, False)
-        return super(CategoryAdmin, self).formfield_for_manytomany(
-            db_field, request, **kwargs)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         if db_field.name == 'image':
@@ -37,8 +29,9 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'active')
+    list_display = ('name', 'active', 'category')
     list_filter = ('name',)
+    form = SubcategoryForm
 
 
 class DetailSectionInline(admin.TabularInline):
@@ -73,7 +66,7 @@ class DetailAdmin(admin.ModelAdmin):
     list_display = ('name', 'active')
     list_filter = ('name',)
     fieldsets = (
-        (None, {'fields': ('name', 'caption', 'facts', 'video_url')}),
+        (None, {'fields': ('name', 'subcategory', 'caption', 'facts', 'video_url')}),
         ('Title Image', {'fields': ('title_image',)}),
     )
     form = DetailForm

@@ -1,0 +1,9 @@
+<section id="list">
+    <span ng-repeat="category in categories">
+        <div class="category-image">
+            <a href="#/{{ category.type }}/{{ category.id }}/subcategories/"><span class="link-span"></span></a>
+            <img ng-src="{{ category.image.thumb }}"/>
+            <h5>{{ category.name }}</h5>
+        </div>
+    </span>
+</section>

@@ -5,16 +5,29 @@ from django.contrib import admin
 
 from core.admin import DetailAdmin, SubcategoryAdmin
 from .models import JoinSubcategory, JoinDetail
-from .forms import JoinSubcategoryForm
 
 
 class JoinSubcategoryAdmin(SubcategoryAdmin):
-    form = JoinSubcategoryForm
+
+    def get_form(self, request, obj=None, **kwargs):
+        from . import DETAIL_TYPE
+        form = super(JoinSubcategoryAdmin, self).get_form(request, obj, **kwargs)
+        if 'category' in form.base_fields:
+            field = form.base_fields['category']
+            field.queryset = field.queryset.filter(type=DETAIL_TYPE)
+        return form
 
 admin.site.register(JoinSubcategory, JoinSubcategoryAdmin)
 
 
 class JoinDetailAdmin(DetailAdmin):
-    pass
+
+    def get_form(self, request, obj=None, **kwargs):
+        from . import DETAIL_TYPE
+        form = super(JoinDetailAdmin, self).get_form(request, obj, **kwargs)
+        if 'subcategory' in form.base_fields:
+            field = form.base_fields['subcategory']
+            field.queryset = field.queryset.filter(type=DETAIL_TYPE)
+        return form
 
 admin.site.register(JoinDetail, JoinDetailAdmin)

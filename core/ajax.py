@@ -18,7 +18,7 @@ def page_change_routine(dajax, render, active_link):
     if not active_link.startswith('#'):
         active_link = '#' + active_link
     dajax.script('setActiveLink("' + active_link + '");')
-    dajax.remove_css_class('#bottom_box', 'transparent')
+    dajax.remove_css_class('#bottom-box', 'transparent')
 
 
 @dajaxice_register

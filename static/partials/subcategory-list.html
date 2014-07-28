@@ -1,0 +1,16 @@
+<section id="subcategory-list">
+    {{ message }}
+    <div ng-repeat="subcategory in subcategories">
+        <h3 class="subcategory-name">{{ subcategory.name }}</h3>
+        <p class="subcategory-caption">{{ subcategory.caption }}</p>
+        <div id="images">
+            <span ng-repeat="detail in subcategory.details">
+                <div class="detail-image">
+                    <a class="detail-link" href="#/{{ subcategory.type }}/detail/{{ detail.id }}"><span class="link-span"></span></a>
+                    <img ng-src="{{ detail.title_image.thumb }}"/>
+                    <h5>{{ detail.name }}</h5>
+                </div>
+            </span>
+        </div>
+    </div>
+</section>
