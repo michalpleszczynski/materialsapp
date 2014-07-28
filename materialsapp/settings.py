@@ -210,10 +210,11 @@ RECAPTCHA_PUBLIC = get_env_variable('RECAPTCHA_PUBLIC')
 RECAPTCHA_SECRET = get_env_variable('RECAPTCHA_SECRET')
 
 # load local_settings
-import platform
-try:
-    execfile('%s/materialsapp/local_settings/%s.py' % (
-        BASE_DIR, 'settings-%s' % platform.node().replace('.', '_'))
-    )
-except Exception, e:
-    logging.exception(e)
+if DEBUG:
+    import platform
+    try:
+        execfile('%s/materialsapp/local_settings/%s.py' % (
+            BASE_DIR, 'settings-%s' % platform.node().replace('.', '_'))
+        )
+    except Exception, e:
+        logging.exception(e)
