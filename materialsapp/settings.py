@@ -138,7 +138,7 @@ else:
     AWS_S3_SECURE_URLS = False
 
 MEDIA_ROOT = BASE_DIR + '/media/'
-#STATIC_ROOT = BASE_DIR + '/collected_static/'
+STATIC_ROOT = BASE_DIR + '/collected_static/'
 
 STATICFILES_FINDERS = DEFAULT_SETTINGS.STATICFILES_FINDERS + ('dajaxice.finders.DajaxiceFinder',)
 
