@@ -123,18 +123,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 if DEBUG:
-    # STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
 else:
     DEFAULT_FILE_STORAGE = 'core.storage.DefaultStorage'
     DEFAULT_S3_PATH = 'media'
-    # STATICFILES_STORAGE = 'core.storage.StaticStorage'
-    STATIC_S3_PATH = 'static'
     AWS_STORAGE_BUCKET_NAME = 'media.materialsapp'
-    AWS_STATIC_BUCKET_NAME = 'static.materialsapp'
     MEDIA_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    # STATIC_URL = 'http://%s.s3.amazonaws.com/' % AWS_STATIC_BUCKET_NAME
-    # ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
     AWS_S3_SECURE_URLS = False
 
 MEDIA_ROOT = BASE_DIR + '/media/'

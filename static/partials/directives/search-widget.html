@@ -4,7 +4,7 @@
         <input type="submit" value="Search">
     </form>
     <div id="results">
-        <h4 ng-hide="results.length">Sorry, no results.</h4>
+        <h4 ng-show="results.length == 0">Sorry, no results.</h4>
         <li>
             <ul ng-repeat="result in results">
                 <a ng-href="{{ '#/' + result.type + '/detail/' + result.id + '/' }}">{{ result.name }}</a>
